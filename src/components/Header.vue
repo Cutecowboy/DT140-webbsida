@@ -13,7 +13,7 @@
                         <a id="nav-1" class="nav-link" aria-current="page" href="/">Hem</a>
                     </li>
                     <li class="nav-item">
-                        <a id="nav-2" class="nav-link" href="/add">Lägg till</a>
+                        <a id="nav-2" class="nav-link" href="/product">Produkter</a>
                     </li>
                     <li class="nav-item">
                         <a id="nav-3" class="nav-link" href="/genres">Genre</a>
@@ -60,6 +60,7 @@ export default {
         logoutUser() {
             if (confirm("Vill du logga ut?")) {
                 sessionStorage.removeItem("TOKENAPI");
+                sessionStorage.removeItem("userId");
                 window.location.href = "/login?message=1";
             }
         },
@@ -72,7 +73,7 @@ export default {
         // check which navbar that should be active
         checkNavActive(){
             let path = window.location.pathname;
-            let navItems = ["/", "/add", "/genres", "/filter", "/stock"];
+            let navItems = ["/", "/product", "/genres", "/filter", "/stock"];
 
             for (let i = 0; i < navItems.length; i++) {
                 if(path == navItems[i]){
@@ -81,12 +82,30 @@ export default {
                 
             }
 
+        },
+        // check if user is logged in or not, and what role 
+        async checkRole(){
+            if (sessionStorage.getItem("TOKENAPI") !== null) {
+                const resp = await fetch("http://127.0.0.1:8000/api/roleid/" + sessionStorage.getItem("userId") , {
+                method: "GET",
+                headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json",
+                "Authorization": `Bearer ${sessionStorage.getItem("APITOKEN")}`
+                }});
+                
+                const data = await resp.json();
+
+                sessionStorage.setItem("roleId", data.role_id);
+
+            }
         }
 
 
     },
     mounted() {
         this.checkNavActive();
+        this.checkRole()
     }
 }
 

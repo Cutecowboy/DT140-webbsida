@@ -17,6 +17,8 @@ export default {
         <ol class="breadcrumb" id="breadcrumbs">
         </ol>
     </div>
+    <RouterView />
+
   </main>
   <Footer /> 
 
