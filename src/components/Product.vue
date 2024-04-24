@@ -7,12 +7,16 @@
     <img v-if="assignPhoto(product.photo_id, this.photos) !== null" :src="this.imagePath" :alt="'Bild av märket ' + product.name">
     <img v-else :src="'../src/assets/def.png'">
     <p>{{ this.imagePath }}</p>
+
+ 
+
     </div>
     </RouterLink>
 </template>
 
 <script>
 //import Photo from "../components/Photo.vue";
+import axios from 'axios';
 export default{
     data(){
         return {
@@ -34,11 +38,19 @@ export default{
         },
         
         assignPhoto(prodId, photos){
-            photos.forEach(p => {
+            photos.forEach(async p => {
                 console.log(p)
                 if(prodId == p.id){
+                    // found id, now search on laravel
                     
-                    return this.imagePath = "../src/assets/" + p.img1 
+                    const resp = await fetch("http://127.0.0.1:8000/api/showPhoto/" + p.img1);
+                    if(resp.status == 200){
+                        console.log("allt funkar")
+                        return this.imagePath= "http://127.0.0.1:8000/api/showPhoto/" + p.img1;
+
+                    } else return null;
+
+
                 } else { 
                     return null
                 }
