@@ -66,73 +66,140 @@ export default{
         },
 
 
-
-        // get data of bookings, photos and categories before making a new product,
-        async getData(){
-            const resp = await fetch("http://127.0.0.1:8000/api/book/", {
-                method: "GET",
-                headers: {
-                "Accept": "application/json",
-                "Content-type": "application/json",
-                "Authorization": `Bearer ${sessionStorage.getItem("APITOKEN")}`
-                }});
-            
-            const resp1 = await fetch("http://127.0.0.1:8000/api/categories/", {
-            method: "GET",
-            headers: {
-            "Accept": "application/json",
-            "Content-type": "application/json",
-            "Authorization": `Bearer ${sessionStorage.getItem("APITOKEN")}`
-            }});
-            const resp2 = await fetch("http://127.0.0.1:8000/api/photo/", {
-            method: "GET",
-            headers: {
-            "Accept": "application/json",
-            "Content-type": "application/json",
-            "Authorization": `Bearer ${sessionStorage.getItem("APITOKEN")}`
-            }});
-            
-            const data = await resp.json();
-            const data1 = await resp1.json();
-            const data2 = await resp2.json();
-
-
-            // get the length of objects.
-            let len1 = data.length;
-            let len2 = data1.length;
-            let len3 = data2.length;
-            
-            // index to find the id of the newly made booking, and photo.
-            this.book_id = data[len1-1].id;
-            this.category_id = data1[len2-1].id;
-            this.photo_id = data2[len3-1].id;
-
-
-            console.log("har utfört detta!")
-        },
         async addProduct(){
-            this.getData();
+            // conditions for creating the product
+            if((this.name.length > 2) && (this.brand.length > 2) && (this.description.length > 5) && (this.price >= 1)){
 
-            for (let i = 0; i < 3; i++) {
-                if(this.categories[i] !== null){
-                    // formdata for the image(s)
-                    const fd = new FormData();
-                    fd.append('image', this.selectedFile[i]);
-                    fd.append('filename', this.selectedFile[i].name);
+                // max 3 images upload per product (OK if no photos)
+                for (let i = 0; i < 3; i++) {
+                    if(this.selectedFile[i] !== null){
+                        // formdata for the image(s)
+                        const fd = new FormData();
+                        fd.append('image', this.selectedFile[i]);
+                        fd.append('filename', this.selectedFile[i].name);
+                        
+                        await axios.post('http://127.0.0.1:8000/api/upload/', fd, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                        .then(response => {
+                            console.log('Image uploaded successfully:', response.data);
+                            this.photoName[i] = this.selectedFile[i].name;
+                            console.log(this.photoName);
+
+                        })
+                    }
                     
-                    axios.post('http://127.0.0.1:8000/api/upload/', fd, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    })
-                    .then(response => {
-                        console.log('Image uploaded successfully:', response.data);
-                        this.photoName[i] = this.selectedFile[i].name;
-                        console.log(this.photoName);
-
-                    })
                 }
+
+                // picture are now uploaded to API, proceed to create entries in book and photo, store the assigned ID values in the data 
+                let dummy = 0
+
+                const resp = await fetch("http://127.0.0.1:8000/api/book/", {
+                        method: "POST",
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-type": "application/json",
+                            "Authorization": `Bearer ${sessionStorage.getItem("APITOKEN")}`
+                        }
+                    });
+                // if created
+                if(resp.status === 201){
+                    dummy++
+                    let data = await resp.text();
+                    
+                    // store the newly created id
+                    this.book_id = JSON.parse(data).id;
+                }
+
+                // insert the uploaded files name 
+                let photoBody = {
+                    img1: this.photoName[0],
+                    img2: this.photoName[1],
+                    img3: this.photoName[2]
+                };
+
+                const resp1 = await fetch("http://127.0.0.1:8000/api/photo/", {
+                        method: "POST",
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-type": "application/json",
+                            "Authorization": `Bearer ${sessionStorage.getItem("APITOKEN")}`
+                        },
+                        body: JSON.stringify(photoBody)
+                    });
                 
+                // if new created
+                if(resp1.status === 201){
+                    dummy++
+                    let data = await resp1.text();
+                    // store new id 
+                    this.photo_id = JSON.parse(data).id;
+                }
+
+                // if everything went good until this part, continue creating the product 
+                if(dummy == 2){
+                    // get the category id based on which category was chosen on the select meny
+                    this.categories.forEach(cat => {
+                        console.log(cat)
+                        if(cat.categoryname == this.categoryname){
+                            this.category_id = cat.id;
+                            console.log(this.category_id, "min cat")
+                        }
+                    });
+
+                    let productBody = {
+                        name: this.name,
+                        brand: this.brand,
+                        description: this.description,
+                        price: this.price,
+                        category_id: this.category_id,
+                        photo_id: this.photo_id,
+                        book_id: this.book_id
+                    };
+
+
+                    const resp2 = await fetch("http://127.0.0.1:8000/api/product/", {
+                        method: "POST",
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-type": "application/json",
+                            "Authorization": `Bearer ${sessionStorage.getItem("APITOKEN")}`
+                        },
+                        body: JSON.stringify(productBody)
+                    });
+                    console.log(resp2)
+
+                    if(resp2.status == 201){
+                        document.getElementById("message").innerHTML = "Produkten har lagts till!";
+                        document.getElementById("message").style.display = "block";
+                        setTimeout(this.timer, 10000);
+                        this.name = "";
+                        this.brand = "";
+                        this.description = "";
+                        this.price = "";
+                        this.category_id = "";
+                        this.photo_id = "";
+                        this.book_id = "";
+                        this.selectedFile = [null, null, null];
+                        this.photoName = ['def.png', 'def.png', 'def.png'];      
+
+
+                    } else {
+
+                        document.getElementById("message").innerHTML = "Produkten kunde inte läggas  in!"
+                        document.getElementById("message").style.display = "block";
+                        setTimeout(this.timer, 10000);
+                    }
+
+                }
+
+            }
+            else {
+                document.getElementById("message").innerHTML = "Produkten kunde inte läggas  in!"
+                document.getElementById("message").style.display = "block";
+                setTimeout(this.timer, 10000);
             }
 
 
@@ -155,6 +222,9 @@ export default{
             }
 
 
+        },
+        timer() {
+            document.getElementById("message").style.display = "none";
         }
     },
     mounted() {
