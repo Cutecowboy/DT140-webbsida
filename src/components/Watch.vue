@@ -88,7 +88,7 @@ export default{
              
 
                 // check that user has to be logged in as a user before booking
-                if(sessionStorage.getItem("roleId") == 1){
+                if(sessionStorage.getItem("roleId") == '1'){
                             
 
                 // book body, set status to booked via status = 1, send userid 
@@ -110,7 +110,7 @@ export default{
 
                 const data = await resp.json()
                 if (resp.status === 200) {
-                        document.getElementById("message").innerHTML = "Du har nu bokat produkten!";
+                        document.getElementById("message").innerHTML = "Du har nu avbokat produkten!";
                         document.getElementById("message").style.display = "block";
                         setTimeout(this.timer, 10000);
                     } else {
@@ -122,6 +122,46 @@ export default{
                 console.log("user is not logged in!")
             }
         }
+        
+
+        },
+        async editBooking(id){
+            // prompt user to make choice of booking
+            if(confirm("Är du säker på att du vill avboka bokningen?")){
+                // fetch username info via API token, API calling or via sessionStorage
+                let userId = sessionStorage.getItem("userId");
+                console.log(userId, "my userID")
+          
+                // book body, set status to booked via status = 1, send userid 
+                let bookBody = {
+                    status: 0,
+                    user_id: userId
+                }
+
+                // send query
+                const resp = await fetch("http://127.0.0.1:8000/api/book/" + id, {
+
+                    method: "PUT",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-type": "application/json",
+                    },
+                    body: JSON.stringify(bookBody)
+                });
+
+                const data = await resp.json()
+                if (resp.status === 200) {
+                        document.getElementById("message").innerHTML = "Du har nu avbokat produkten!";
+                        document.getElementById("message").style.display = "block";
+                        setTimeout(this.timer, 10000);
+                    } else {
+                        document.getElementById("message").innerHTML = "Något gick fel vid bokningen, testa igen!"
+                        document.getElementById("message").style.display = "block";
+                        setTimeout(this.timer, 10000);
+                    }
+            
+        }
+        
 
         },
         timer() {
@@ -168,9 +208,9 @@ export default{
 
             }
         },
-        timer() {
+        /* timer() {
         document.getElementById("message").style.display = "none";
-        }
+        } */
     
     }
 }

@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue';
 import ProductView from '../views/ProductView.vue';
 import WatchView from '../views/WatchView.vue';
 import LoginView from "../views/LoginView.vue";
+import CreateView from "../views/CreateView.vue";
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,10 +25,15 @@ const router = createRouter({
       component: WatchView
     },
     {
-     path: "/login",
+      path: "/login",
       name: "login",
       component: LoginView
     },
+    {
+      path: "/skapa",
+      name: "Skapa",
+      component: CreateView
+    }
   ]
 })
 
