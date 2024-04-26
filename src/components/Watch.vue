@@ -17,22 +17,56 @@
     <h1>Administrera produkten: {{ Product.name }}</h1>
     <p>{{Product.brand}}</p>
     <p>{{ Product.description }}</p>
-    p
+
+    {{ Product.book_id }}
+
 </div>
 
-    <div>
-        <VueCarousel>
-      
-        <img :src="'../src/assets/' + Photo.img1" alt="Image 1">
-        <!-- <img :src="'../src/assets/' + Photo.img2" alt="Image 2">
-      
-        <img :src="'../src/assets/' + Photo.img3" alt="Image 3"> -->
-        </VueCarousel>
+<div id="carouselDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-bs-target="#carouselDark" data-bs-slide-to="0" class="active"></li>
+    <li data-bs-target="#carouselDark" data-bs-slide-to="1"></li>
+    <li data-bs-target="#carouselDark" data-bs-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img :src="getPath(0, this.Photo.id)" class="d-block w-100" alt="Slide 1">
+      <div class="carousel-caption d-none d-sm-block">
+        <h5>First slide label</h5>
+        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      </div>
     </div>
+    <div class="carousel-item">
+      <img :src="getPath(1, this.Photo.id)" class="d-block w-100" alt="Slide 2">
+      <div class="carousel-caption d-none d-sm-block">
+        <h5>Second slide label</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img  :src="getPath(2, this.Photo.id)" class="d-block w-100" alt="Slide 3">
+      <div class="carousel-caption d-none d-sm-block">
+        <h5>Third slide label</h5>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselDark" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselDark" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
+
+
+   
 
 <div v-if="roleId() === '1'">
 
-    <form @submit.prevent="bookProduct(Product.book_id)">
+    <form @submit.prevent="bookProduct(this.Product.book_id)">
     
     <input type="submit" class="btn btn-success mt-3" value="Reservera">
     </form>
@@ -50,7 +84,8 @@
         </div>
 
 </div>
-    <form v-if="bookStatus(Product.id)" @submit.prevent="editBooking(Product.book_id)">
+    
+    <form v-if="bookStatus(this.Product.book_id) == true" @submit.prevent="editBooking(this.Product.book_id)">
     <label for="">Denna produkt är bokad</label><br>
         
     <input type="submit" class="btn btn-danger mt-3" value="Avboka bokningen">
@@ -67,12 +102,16 @@
 </template>
 
 <script>
-import { VueCarousel } from 'vue-carousel';
 
 export default{
-    components: {
-        VueCarousel
+    data() {
+        return {
+            photos: ['def.png', 'def.png', 'def.png'],
+             id: this.$route.params.id,
+             photo_id: 0
+         }
     },
+
     props:{
         Product: Object,
         Photo: Object
@@ -160,9 +199,18 @@ export default{
                         setTimeout(this.timer, 10000);
                     }
             
-        }
-        
+        }     
+        },    
 
+      
+
+        getPath(i, photoid){
+            console.log("photoid är ", photoid)
+            this.photos[0] = this.Photo.img1
+            this.photos[1] = this.Photo.img2
+            this.photos[2] = this.Photo.img3
+
+            return "http://127.0.0.1:8000/api/showPhoto/" + this.photos[i];
         },
         timer() {
             document.getElementById("message").style.display = "none";
@@ -172,6 +220,7 @@ export default{
             return sessionStorage.getItem("roleId");
         },
         async bookStatus(id){
+            console.log("bokningsstatus", id)
             const resp = await fetch("http://127.0.0.1:8000/api/book/" + id, {
             method: "GET",
             headers: {
@@ -180,8 +229,9 @@ export default{
             }
             });
             const data = await resp.json()
-
+            console.log(data.status)
             if(data.status == 1){
+                console.log("returnerar sant")                
                 return true;
             } else return false;
 
@@ -207,11 +257,16 @@ export default{
             }
 
             }
-        },
+        }
+
+     
+
         /* timer() {
         document.getElementById("message").style.display = "none";
         } */
     
+    },
+    mounted(){
     }
 }
 </script>

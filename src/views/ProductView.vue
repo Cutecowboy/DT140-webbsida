@@ -59,9 +59,10 @@ export default {
 
 <template>
     <h2>Att göra lista</h2>
-
-    <Product v-for="product in products" :product="product" :key="product.id" :photos="photo"/>
-
+    <div class="row row-cols-1 row-cols-sm-2 g-3">
+        
+        <Product v-for="product in products" :product="product" :key="product.id" :photos="photo"/>
+    </div>
 <!--     <Addtodo @todoAdded="getTodos()" /> -->
 </template>
 
