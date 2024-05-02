@@ -4,6 +4,7 @@ import ProductView from '../views/ProductView.vue';
 import WatchView from '../views/WatchView.vue';
 import LoginView from "../views/LoginView.vue";
 import CreateView from "../views/CreateView.vue";
+import EditView from '../views/EditView.vue';
 
 
 const router = createRouter({
@@ -33,6 +34,11 @@ const router = createRouter({
       path: "/skapa",
       name: "Skapa",
       component: CreateView
+    },
+    {
+      path: "/editProduct/:id",
+      name: "Redigera",
+      component: EditView
     }
   ]
 })
