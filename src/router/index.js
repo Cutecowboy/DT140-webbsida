@@ -8,6 +8,7 @@ import CreateView from "../views/CreateView.vue";
 import EditView from '../views/EditView.vue';
 import CategoryView from '@/views/CategoryView.vue';
 import AdminView from '@/views/AdminView.vue';
+import SearchView from '../views/SearchView.vue';
 
 
 const router = createRouter({
@@ -57,6 +58,11 @@ const router = createRouter({
       path: "/admin",
       name: "Admin",
       component: AdminView
+    },
+    {
+      path: "/search",
+      name: "Sök",
+      component: SearchView
     }
   ]
 })

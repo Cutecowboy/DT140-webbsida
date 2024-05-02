@@ -36,7 +36,7 @@
                     </li>
                 </ul>
                 <form @submit.prevent="searchGame()" class="d-flex">
-                    <input v-model="this.search" class="form-control me-2" type="search" placeholder="Sök efter spel"
+                    <input v-model="this.search" class="form-control me-2" type="search" placeholder="Sök efter produkter"
                         aria-label="Search">
                     <button class="btn btn-outline-light" type="submit">Sök</button>
                 </form>

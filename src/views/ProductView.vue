@@ -26,28 +26,8 @@ export default {
 
             this.photos = data;
             console.log(data);
-        },
-
-
-        deleteProduct(id){
-            console.log(id)
-
-            // gör ajax anrop och ta bort den med den givna id'n 
-
-            /* const resp = await fetch("LÄNK/" + id, {
-                method: "DELETE",
-                headers: {
-                    "Accept": "application/json",
-                    "Content-type": "application/json"
-                }
-            });
-            
-            const data = await resp.json();
-
-            this.getTodos();
-            */
-
         }
+        
     },
     mounted() {
         this.getProducts(),

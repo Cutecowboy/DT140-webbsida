@@ -38,7 +38,7 @@
             <label for="email" class="form-label">E-post</label>
             <input class="form-control" type="email" v-model="email" name="email" id="" readonly>
             <label for="role" class="form-label">Roll</label>
-            <input v-if="role == 1" class="form-control" type="text" value="Administratör" readonly>
+            <input v-if="this.role == 1" class="form-control" type="text" value="Administratör" readonly>
             <input v-else class="form-control" type="text" value="Användare" readonly>
             
             
