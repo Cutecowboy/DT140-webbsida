@@ -16,16 +16,23 @@
                         <a id="nav-2" class="nav-link" href="/product">Produkter</a>
                     </li>
                     <li class="nav-item">
-                        <a id="nav-3" class="nav-link" href="/genres">Genre</a>
+                        <a id="nav-3" class="nav-link" href="/category">Kategori</a>
+                    </li>
+                    <div v-if="checkRoleStatus()" style="display: flex;">
+                    <li class="nav-item">
+                        <a id="nav-4" class="nav-link" href="/skapa">Skapa</a>
                     </li>
                     <li class="nav-item">
-                        <a id="nav-4" class="nav-link" href="/filter">Filtrera</a>
+                        <a id="nav-5" class="nav-link" href="/admin">Administrera</a>
                     </li>
-                    <li class="nav-item">
-                        <a id="nav-5" class="nav-link" href="/stock">Lagersaldo</a>
-                    </li>
-                    <li class="nav-item">
+                    </div>
+                    
+                    
+                    <li v-if="checkLogin() == true" class="nav-item">
                         <a @click="logoutUser()" class='nav-link' href="#">Logga ut</a>
+                    </li>
+                    <li v-else class="nav-item">
+                        <a class='nav-link' href="/login">Logga in</a>
                     </li>
                 </ul>
                 <form @submit.prevent="searchGame()" class="d-flex">
@@ -59,8 +66,7 @@ export default {
         // logout the user if it confirms that it wants to logout
         logoutUser() {
             if (confirm("Vill du logga ut?")) {
-                sessionStorage.removeItem("TOKENAPI");
-                sessionStorage.removeItem("userId");
+                sessionStorage.clear()
                 window.location.href = "/login?message=1";
             }
         },
@@ -73,7 +79,7 @@ export default {
         // check which navbar that should be active
         checkNavActive(){
             let path = window.location.pathname;
-            let navItems = ["/", "/product", "/genres", "/filter", "/stock"];
+            let navItems = ["/", "/product", "/category", "/skapa", "/admin"];
 
             for (let i = 0; i < navItems.length; i++) {
                 if(path == navItems[i]){
@@ -83,9 +89,9 @@ export default {
             }
 
         },
-        // check if user is logged in or not, and what role 
+        // check if user is logged in or not, and what role
         async checkRole(){
-            if (sessionStorage.getItem("TOKENAPI") !== null) {
+            if (sessionStorage.getItem("APITOKEN") !== null) {
                 const resp = await fetch("http://127.0.0.1:8000/api/roleid/" + sessionStorage.getItem("userId") , {
                 method: "GET",
                 headers: {
@@ -97,15 +103,30 @@ export default {
                 const data = await resp.json();
 
                 sessionStorage.setItem("roleId", data.role_id);
-
+                
             }
+        },
+        checkLogin(){
+            if(sessionStorage.getItem("APITOKEN") !== null){
+                return true;
+            } else return false;
+        },
+        checkRoleStatus(){
+            if(sessionStorage.getItem('roleId') == '1'){
+                console.log("du är admin")
+                return true;
+            } else{
+                console.log("ej admin")
+                return false;
+
+            } 
         }
 
 
     },
     mounted() {
-        this.checkNavActive();
         this.checkRole()
+        this.checkNavActive();
     }
 }
 

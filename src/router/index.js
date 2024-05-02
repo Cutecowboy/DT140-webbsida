@@ -3,9 +3,11 @@ import HomeView from '../views/HomeView.vue';
 import ProductView from '../views/ProductView.vue';
 import WatchView from '../views/WatchView.vue';
 import LoginView from "../views/LoginView.vue";
+import RegisterView from "../views/RegisterView.vue";
 import CreateView from "../views/CreateView.vue";
 import EditView from '../views/EditView.vue';
 import CategoryView from '@/views/CategoryView.vue';
+import AdminView from '@/views/AdminView.vue';
 
 
 const router = createRouter({
@@ -32,6 +34,11 @@ const router = createRouter({
       component: LoginView
     },
     {
+      path: "/register",
+      name: "Registrera",
+      component: RegisterView
+    },
+    {
       path: "/skapa",
       name: "Skapa",
       component: CreateView
@@ -45,6 +52,11 @@ const router = createRouter({
       path: "/category",
       name: "Kategori",
       component: CategoryView
+    },
+    {
+      path: "/admin",
+      name: "Admin",
+      component: AdminView
     }
   ]
 })
