@@ -5,6 +5,7 @@ import WatchView from '../views/WatchView.vue';
 import LoginView from "../views/LoginView.vue";
 import CreateView from "../views/CreateView.vue";
 import EditView from '../views/EditView.vue';
+import CategoryView from '@/views/CategoryView.vue';
 
 
 const router = createRouter({
@@ -39,6 +40,11 @@ const router = createRouter({
       path: "/editProduct/:id",
       name: "Redigera",
       component: EditView
+    },
+    {
+      path: "/category",
+      name: "Kategori",
+      component: CategoryView
     }
   ]
 })
