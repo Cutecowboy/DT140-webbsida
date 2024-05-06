@@ -1,33 +1,34 @@
 <template>
 
     <div class="col">
-    <RouterLink :to="`/productinfo/${product.id}`" class="noLink">
         <div class="card" >
+            <RouterLink :to="`/productinfo/${product.id}`" class="noLink">
+
             <img v-if="assignPhoto(product.photo_id, this.photos) !== null" :src="this.imagePath" :alt="'Bild av märket ' + product.name" class="card-img-top">
             <img v-else :src="'../src/assets/def.png'">
+             </RouterLink>
+
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
                 <h6 class="card-subtitle">{{ product.price + " kr" }}</h6>
                 <p class="card-text">{{ product.description }}</p>
-                <div v-if="roleId() == '1'">
+                <div v-if="roleId() == '2'">
         
-                    <RouterLink :to="`/editProduct/${product.id}`">
-                    <button class="btn btn-warning mt-3">Redigera</button>
+                    <RouterLink :to="`/productinfo/${product.id}`">
+                    <button class="btn btn-success mt-3">Se mer</button>
                     </RouterLink>
-                    <button @click="deleteGame(product.id)" class="btn btn-danger mt-3 ms-3">Ta bort</button>
+                    <button @click="unbook(product.book_id)" class="btn btn-danger mt-3 ms-3">Avboka</button>
 
-                    <div v-if="bookStatus(product.book_id) == true">
-                        <p>Bokad</p>
-                    </div>
+                
 
                 </div>
             </div>
+
         </div>
     
    
  
 
-    </RouterLink>
 </div>
 </template>
 
@@ -78,20 +79,24 @@ export default{
             console.log(sessionStorage.getItem("roleId"))
             return sessionStorage.getItem("roleId");
         },
-        async deleteGame(id){
-            if(confirm("Är du säker på att du vill ta bort produkten?")){
-                console.log("du tar bort")
-                const resp = await fetch("http://127.0.0.1:8000/api/product/" + id, {
-            method: "DELETE",
+        async unbook(id){
+            if(confirm("Är du säker på att du vill avboka produkten?")){
+                let bookBody = {
+                    status: 0,
+                    user_id: 0
+                }
+                const resp = await fetch("http://127.0.0.1:8000/api/book/" + id, {
+            method: "PUT",
             headers: {
                 "Accept": "application/json",
                 "Content-type": "application/json",
                 "Authorization": `Bearer ${sessionStorage.getItem("APITOKEN")}`
-            }
+            },
+            body: JSON.stringify(bookBody)
             });
 
             if(resp.status === 200){
-                this.$router.push('/product?message=10');
+            window.location.href = "/bookings?message=1"            
             } else {
                 document.getElementById("message").innerHTML = "Något gick fel när spelet skulle tas bort!";
                 document.getElementById("message").style.display = "block";

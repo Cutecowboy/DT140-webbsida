@@ -1,7 +1,7 @@
 <template>
 
 <!-- if user or not logged in -->
-<div v-if="roleId() !== '2'">
+<div v-if="roleId() !== '1'">
 
 
     <h1>hej</h1>
@@ -64,7 +64,7 @@
 
    
 
-<div v-if="roleId() === '1'">
+<div v-if="roleId() === '2'">
 
     <form @submit.prevent="bookProduct(this.Product.book_id)">
     
@@ -72,7 +72,7 @@
     </form>
 </div>
 
-<div v-else-if="roleId() === '2'">
+<div v-else-if="roleId() === '1'">
 
     <div class="mb-4">
         <div>
@@ -127,7 +127,7 @@ export default{
              
 
                 // check that user has to be logged in as a user before booking
-                if(sessionStorage.getItem("roleId") == '1'){
+                if(sessionStorage.getItem("roleId") == '2'){
                             
 
                 // book body, set status to booked via status = 1, send userid 
@@ -149,7 +149,7 @@ export default{
 
                 const data = await resp.json()
                 if (resp.status === 200) {
-                        document.getElementById("message").innerHTML = "Du har nu avbokat produkten!";
+                        document.getElementById("message").innerHTML = "Du har nu bokat produkten!";
                         document.getElementById("message").style.display = "block";
                         setTimeout(this.timer, 10000);
                     } else {

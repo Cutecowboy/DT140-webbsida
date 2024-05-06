@@ -61,6 +61,8 @@ export default {
 
                 } else {
                     sessionStorage.setItem("APITOKEN", data.token);
+                    sessionStorage.setItem("userId", data.userId);
+
                     // insert message in redirection
                     window.location.href = "/?message=3";
                 }
