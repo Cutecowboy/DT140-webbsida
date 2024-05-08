@@ -1,31 +1,27 @@
 <template>
     <h1>Sök</h1>
-        <h2>hej</h2>
-            <div v-for="product in products" :product="product" :key="product.id" class="col">
-                <h1>hej</h1>
-                <RouterLink :to="`/productinfo/${product.id}`" class="noLink">
-                    <div class="card" >
-                        <img :src="'../src/assets/def.png'">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <h6 class="card-subtitle">{{ product.price + " kr" }}</h6>
-                            <p class="card-text">{{ product.description }}</p>
-                            
-                        </div>
-                    </div>
-                
-            
-            
+    
+    <div v-if="this.products.length > 0">
+        <h3>Din sökning</h3>
+        <div class="row row-cols-1 row-cols-sm-2 g-3">
+            <Product v-for="product in products" :product="product" :key="product.id" />
+        </div>
 
-                </RouterLink>
-            </div>
-    </template>
+    </div>
+    <div v-else>
+        <p>Din sökning gav inga resultat!</p>
+        <a href='/'>Gå tillbaka till startsidan</a>
+    </div>
+</template>
     
     <script>
+    import Product from '../components/Product.vue';
     let urlParam = new URLSearchParams(window.location.search)
     
     export default {
-     
+     components: {
+        Product,
+    },
       data() {
         return {
           products: [],
@@ -38,8 +34,8 @@
     
       methods: {
         // fetch the games in the database
-        async searchProduct(query) {
-          const resp = await fetch("http://127.0.0.1:8000/api/search/product/" + query, {
+        async searchProduct(q) {
+          const resp = await fetch("http://127.0.0.1:8000/api/search/product/" + q, {
             method: "GET",
             headers: {
               "Accept": "application/json",
@@ -49,14 +45,8 @@
           });
           const data = await resp.json();
     
-          this.product = data;
-          if(this.product.length == 0){
-            document.querySelector('.row').innerHTML = `
-            <p>Din sökning gav inga resultat!</p>
-            <a href='/'>Gå tillbaka till startsidan</a>
-            `
-          }
-          console.log(this.product)
+          this.products = data;
+          
         },
         async getPhotos(){
             const resp = await fetch("http://127.0.0.1:8000/api/photo");
@@ -116,7 +106,6 @@
       mounted() {
         this.breadcrumb();
         this.searchProduct(this.query);
-        this.getPhotos()
 
       }
     }

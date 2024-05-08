@@ -77,10 +77,25 @@ export default{
 
             }
             console.log(this.prod, "detta prod")
+        },
+        restrict(){
+        if(sessionStorage.getItem('roleId') !== '2'){
+            window.location.href = "/?message=2";
         }
     },
+    breadcrumb() {
+            document.getElementById("breadcrumbs").innerHTML = `
+            <li class="breadcrumb-item"><a href="/">Hem</a></li>
+            <li class="breadcrumb-item active">Bokningar</li>
+            `
+        },
+    
+    },
     mounted(){
+        this.restrict();
+
         this.getBooking();
+        this.breadcrumb();
     }
 }
 

@@ -10,6 +10,7 @@ import CategoryView from '@/views/CategoryView.vue';
 import AdminView from '@/views/AdminView.vue';
 import SearchView from '../views/SearchView.vue';
 import BookedView from '../views/BookedView.vue';
+import AboutView from '../views/AboutView.vue';
 
 
 const router = createRouter({
@@ -27,7 +28,7 @@ const router = createRouter({
     },
     {
       path: "/productinfo/:id",
-      name: "Hejdå",
+      name: "Produkt",
       component: WatchView
     },
     {
@@ -69,6 +70,11 @@ const router = createRouter({
       path: "/bookings",
       name: "Bokningar",
       component: BookedView
+    },
+    {
+      path: "/about",
+      name: "Om oss",
+      component: AboutView
     }
   ]
 })

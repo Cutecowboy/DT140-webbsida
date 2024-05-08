@@ -1,4 +1,5 @@
 <script>
+import $ from 'jquery';
 import Watch from '../components/Watch.vue';
 let urlParam = new URLSearchParams(window.location.search)
 
@@ -32,13 +33,16 @@ export default {
 
             this.photo = data1;
             console.log(data);
-        },
-        async getPhoto(id){
-            const resp = await fetch("http://127.0.0.1:8000/api/photo/" + id);
-            const data = await resp.json(); 
+            this.breadcrumb();
 
-            this.photo = data;
-            console.log(data);
+        },
+        
+        breadcrumb() {
+            document.getElementById("breadcrumbs").innerHTML = `
+            <li class="breadcrumb-item"><a href="/">Hem</a></li>
+            <li class="breadcrumb-item active"><a href="/product">Produkter</a></li>
+            <li class="breadcrumb-item active">${this.product.name}</li>
+            `
         },
         
     },

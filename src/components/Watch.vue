@@ -22,54 +22,41 @@
 
 </div>
 
-<div id="carouselDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-bs-target="#carouselDark" data-bs-slide-to="0" class="active"></li>
-    <li data-bs-target="#carouselDark" data-bs-slide-to="1"></li>
-    <li data-bs-target="#carouselDark" data-bs-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img :src="getPath(0, this.Photo.id)" class="d-block w-100" alt="Slide 1">
-      <div class="carousel-caption d-none d-sm-block">
-        <h5>First slide label</h5>
-        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-      </div>
+
+
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-4">
+        <img :src="getPath(0, this.Photo.id)" :alt="'Image'" class="img-fluid thumbnail" @click="enlargeImage(getPath(0, this.Photo.id))">
+        </div>
+        <div class="col-md-4">
+        <img :src="getPath(1, this.Photo.id)" :alt="'Image'" class="img-fluid thumbnail" @click="enlargeImage(getPath(1, this.Photo.id))">
+        </div>
+        <div class="col-md-4">
+        <img :src="getPath(2, this.Photo.id)" :alt="'Image'" class="img-fluid thumbnail" @click="enlargeImage(getPath(2, this.Photo.id))">
+        </div>
     </div>
-    <div class="carousel-item">
-      <img :src="getPath(1, this.Photo.id)" class="d-block w-100" alt="Slide 2">
-      <div class="carousel-caption d-none d-sm-block">
-        <h5>Second slide label</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img  :src="getPath(2, this.Photo.id)" class="d-block w-100" alt="Slide 3">
-      <div class="carousel-caption d-none d-sm-block">
-        <h5>Third slide label</h5>
-        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <img :src="enlargedImgSrc" alt="Enlarged Image" class="img-fluid">
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <a class="carousel-control-prev" href="#carouselDark" role="button" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselDark" role="button" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </a>
-</div>
 
-
-   
 
 <div v-if="roleId() === '2'">
-
-    <form @submit.prevent="bookProduct(this.Product.book_id)">
+        <form @submit.prevent="bookProduct(this.Product.book_id)">
     
-    <input type="submit" class="btn btn-success mt-3" value="Reservera">
-    </form>
+        <input  v-if="bookStatus(this.Product.book_id)" type="submit" class="btn btn-success mt-3" id="boka" value="Reservera">
+        <button type="button" class="btn btn-success btn-lg" disabled id="avboka">Reserverad</button>
+
+        </form>
+
+    
 </div>
 
 <div v-else-if="roleId() === '1'">
@@ -84,16 +71,18 @@
         </div>
 
 </div>
-    
+<div>
     <form v-if="bookStatus(this.Product.book_id) == true" @submit.prevent="editBooking(this.Product.book_id)">
     <label for="">Denna produkt är bokad</label><br>
         
     <input type="submit" class="btn btn-danger mt-3" value="Avboka bokningen">
     </form>
-
-    
-
+</div>   
 </div>
+<div v-else>
+    <a href="/login">Logga in för att boka</a>
+</div>
+
 
 
 
@@ -102,13 +91,15 @@
 </template>
 
 <script>
+import $ from 'jquery';
 
 export default{
     data() {
         return {
             photos: ['def.png', 'def.png', 'def.png'],
              id: this.$route.params.id,
-             photo_id: 0
+             photo_id: 0,
+             enlargedImgSrc: ''
          }
     },
 
@@ -228,12 +219,23 @@ export default{
                 "Content-type": "application/json",
             }
             });
-            const data = await resp.json()
-            console.log(data.status)
-            if(data.status == 1){
-                console.log("returnerar sant")                
-                return true;
-            } else return false;
+            if(resp.status != 404){
+                const data = await resp.json()
+                console.log(data.status)
+                if(data.status == 1){
+                    console.log("returnerar sant")
+                    document.getElementById("boka").style.display = "none";
+
+                    return true;
+                } else 
+                {
+                    console.log("returnerar falskt")
+                    document.getElementById("avboka").style.display = "none";
+
+
+                    return false;
+                }
+            }
 
         },
         async deleteGame(id){
@@ -257,6 +259,21 @@ export default{
             }
 
             }
+        },
+        async checkItem(id){
+            const resp = await fetch("http://127.0.0.1:8000/api/product/" + id);
+            if(resp.status == 404){
+                window.location.href = "/?message=1"
+            } 
+
+        },
+        enlargeImage(src) {
+            console.log(src)
+            this.enlargedImgSrc = src;
+
+            $('#exampleModal').modal('show');
+            $('#exampleModal').modal('show');
+
         }
 
      
@@ -267,6 +284,7 @@ export default{
     
     },
     mounted(){
+        this.checkItem(this.id)
     }
 }
 </script>

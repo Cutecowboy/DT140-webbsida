@@ -267,9 +267,16 @@ export default {
         },
         timer() {
             document.getElementById("message").style.display = "none";
+        },
+        restrict(){
+            if(sessionStorage.getItem('roleId') !== '2'){
+            window.location.href = "/?message=2";
         }
+    }
+
     },
     mounted(){
+        this.restrict();
         this.id = this.$route.params.id;
         this.getData();
     }

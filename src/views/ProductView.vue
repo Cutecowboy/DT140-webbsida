@@ -26,12 +26,19 @@ export default {
 
             this.photos = data;
             console.log(data);
-        }
+        },
+        breadcrumb() {
+            document.getElementById("breadcrumbs").innerHTML = `
+            <li class="breadcrumb-item"><a href="/">Hem</a></li>
+            <li class="breadcrumb-item active">Produkter</li>
+            `
+        },
         
     },
     mounted() {
-        this.getProducts(),
-        this.getPhotos()
+        this.getProducts();
+        this.getPhotos();
+        this.breadcrumb();
     }
 }
 

@@ -220,10 +220,24 @@ export default {
                 form.style.display = "block";
                 this.editcatname = this.categoryname;
             }
+        },
+        restrict(){
+        if(sessionStorage.getItem('roleId') !== '1'){
+            window.location.href = "/?message=2";
         }
+        
+    },
+    breadcrumb() {
+            document.getElementById("breadcrumbs").innerHTML = `
+            <li class="breadcrumb-item"><a href="/">Hem</a></li>
+            <li class="breadcrumb-item active">Kategori</li>
+            `
+        },
     },
     mounted(){
+        this.restrict();
         this.getCategory();
+        this.breadcrumb();
     }
 }
 </script>

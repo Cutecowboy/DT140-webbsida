@@ -1,7 +1,18 @@
 <script>
 
 export default{
-  
+  methods: {
+    breadcrumb() {
+            document.getElementById("breadcrumbs").innerHTML = `
+            <li class="breadcrumb-item active">Hem</li>
+            `
+        },
+  },
+  mounted(){
+    this.breadcrumb();
+  }
+
+
 }
 
 

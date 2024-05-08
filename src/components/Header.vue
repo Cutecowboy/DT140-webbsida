@@ -15,10 +15,11 @@
                     <li class="nav-item">
                         <a id="nav-2" class="nav-link" href="/product">Produkter</a>
                     </li>
+                   
+                    <div v-if="checkRoleStatus('1')" style="display: flex;">
                     <li class="nav-item">
                         <a id="nav-3" class="nav-link" href="/category">Kategori</a>
                     </li>
-                    <div v-if="checkRoleStatus()" style="display: flex;">
                     <li class="nav-item">
                         <a id="nav-4" class="nav-link" href="/skapa">Skapa</a>
                     </li>
@@ -26,7 +27,14 @@
                         <a id="nav-5" class="nav-link" href="/admin">Administrera</a>
                     </li>
                     </div>
-                    
+                    <div v-if="checkRoleStatus('2')" style="display: flex;">
+                        <li class="nav-item">
+                        <a id="nav-4" class="nav-link" href="/bookings">Bokningar</a>
+                    </li>
+                    </div>
+                    <li class="nav-item">
+                        <a id="nav-6" class="nav-link" href="/about">Om oss</a>
+                    </li>
                     
                     <li v-if="checkLogin() == true" class="nav-item">
                         <a @click="logoutUser()" class='nav-link' href="#">Logga ut</a>
@@ -79,7 +87,16 @@ export default {
         // check which navbar that should be active
         checkNavActive(){
             let path = window.location.pathname;
-            let navItems = ["/", "/product", "/category", "/skapa", "/admin"];
+            let navItems;
+            if(sessionStorage.getItem('roleId') == 1){
+                navItems = ["/", "/product", "/category", "/skapa", "/admin", "/about"];
+            } else if (sessionStorage.getItem('roleId') == 2){
+                navItems = ["/", "/product", "/category", "/bookings", "/admin", "/about"];
+
+            } else {
+                navItems = ["/", "/product", "", "", "", "/about"];
+
+            }
 
             for (let i = 0; i < navItems.length; i++) {
                 if(path == navItems[i]){
@@ -104,6 +121,8 @@ export default {
 
                 sessionStorage.setItem("roleId", data.role_id);
                 
+            } else {
+                sessionStorage.setItem('roleId', 0);
             }
         },
         checkLogin(){
@@ -111,12 +130,10 @@ export default {
                 return true;
             } else return false;
         },
-        checkRoleStatus(){
-            if(sessionStorage.getItem('roleId') == '1'){
-                console.log("du är admin")
+        checkRoleStatus(id){
+            if(sessionStorage.getItem('roleId') == id){
                 return true;
             } else{
-                console.log("ej admin")
                 return false;
 
             } 

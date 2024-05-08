@@ -173,10 +173,17 @@ export default {
                 form.style.display = "block";
                 this.editcatname = this.categoryname;
             }
-        }
+        },
+        breadcrumb() {
+            document.getElementById("breadcrumbs").innerHTML = `
+            <li class="breadcrumb-item"><a href="/">Hem</a></li>
+            <li class="breadcrumb-item active">Administrera</li>
+            `
+        },
     },
     mounted(){
         this.getUsers();
+        this.breadcrumb();
     }
 }
 
