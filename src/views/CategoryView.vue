@@ -20,7 +20,7 @@
         </select>
         <form id="form-4" style="display: none;" @submit.prevent="editCategory()">
 
-        <label for="editcatname" class="form-label">Ny kategori namn</label>
+        <label for="editcatname" class="form-label mt-3">Ny kategori namn</label>
         <input class="form-control" type="text" v-model="editcatname" name="editcatname" id="" required>
         <input type="submit" class="btn btn-success mt-3" value="Redigera">
         </form>
@@ -205,6 +205,30 @@ export default {
             document.getElementById("message").style.display = "none";
         },
         toggler(i){
+
+            if(i == 1){
+                if((document.getElementById('form-2').style.display == "block") || (document.getElementById('form-3').style.display == "block")){
+                    document.getElementById('form-2').style.display = "none";
+                    document.getElementById('form-3').style.display = "none";
+                    document.getElementById('form-4').style.display = "none";
+                    this.categoryname = "";
+                }
+            } else if (i == 2){
+                if((document.getElementById('form-1').style.display == "block") || (document.getElementById('form-3').style.display == "block")){
+                    document.getElementById('form-1').style.display = "none";
+                    document.getElementById('form-3').style.display = "none";
+                    this.categoryname = "";
+                }
+            }
+            else if (i == 3){
+                if((document.getElementById('form-1').style.display == "block") || (document.getElementById('form-2').style.display == "block")){
+                    document.getElementById('form-1').style.display = "none";
+                    document.getElementById('form-2').style.display = "none";
+                    document.getElementById('form-4').style.display = "none";
+                    this.categoryname = "";
+                }
+            }
+
             if((i > 0) && (i<4)){
                 let form = document.getElementById('form-' + i);
                 if(form.style.display == "none"){

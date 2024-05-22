@@ -23,16 +23,16 @@ export default {
         async getProduct(id){
             const resp = await fetch("http://127.0.0.1:8000/api/product/" + id);
             const data = await resp.json(); 
-
+            if(resp.status == 404){
+                window.location.href = "/?message=1"
+            } 
             this.product = data;
             this.photo_id = this.product.photo_id;
-            console.log(this.photo_id, "photo id uppe i vyn"),
-            console.log(data);
+            
             const resp1 = await fetch("http://127.0.0.1:8000/api/photo/" + this.photo_id);
             const data1 = await resp1.json(); 
 
             this.photo = data1;
-            console.log(data);
             this.breadcrumb();
             this.title(data.name)
 

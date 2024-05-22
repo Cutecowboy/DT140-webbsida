@@ -16,9 +16,7 @@
                     </RouterLink>
                     <button @click="deleteGame(product.id)" class="btn btn-danger mt-3 ms-3">Ta bort</button>
 
-                    <div v-if="bookStatus(product.book_id) == true">
-                        <p>Bokad</p>
-                    </div>
+
 
                 </div>
             </div>
@@ -114,7 +112,8 @@ export default{
             if(data.status === 1){
                 console.log("returnar sanningens mamma", data)
                 return true;
-            } else return false;
+            } else return true;
+             
 
         },
         async editBooking(id){

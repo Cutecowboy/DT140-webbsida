@@ -142,6 +142,18 @@ export default {
         
         toggler(i){
             if((i > 0) && (i<4)){
+                if(i == 1){
+                    if(document.getElementById('form-2').style.display == "block"){
+                        document.getElementById('form-2').style.display = "none";
+                        document.getElementById('form-5').style.display = "none";
+                    }
+                }
+                if(i == 2){
+                    if(document.getElementById('form-1').style.display == "block"){
+                        document.getElementById('form-1').style.display = "none";
+                        document.getElementById('form-4').style.display = "none";
+                    }
+                }
                 let form = document.getElementById('form-' + i);
                 if(form.style.display == "none"){
                     form.style.display = "block";

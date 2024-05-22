@@ -1,6 +1,6 @@
 <template>
 
-<!-- if user or not logged in -->
+<!-- not ADMIN -->
 <div v-if="roleId() !== '1'">
 
     <div class="container mt-5">
@@ -426,7 +426,6 @@ export default{
         .slideshow-slide {
             display: none;
             padding: 0 2rem;
-            padding-left: 3rem;
         }
         img{
             
