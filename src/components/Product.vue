@@ -3,8 +3,12 @@
     <div class="col">
     <RouterLink :to="`/productinfo/${product.id}`" class="noLink">
         <div class="card" >
-            <img v-if="assignPhoto(product.photo_id, this.photos) !== null" :src="this.imagePath" :alt="'Bild av märket ' + product.name" class="card-img-top">
-            <img v-else :src="'../src/assets/def.png'">
+            <div class="ratio-1x1">
+
+                <img v-if="assignPhoto(product.photo_id, this.photos) !== null" :src="this.imagePath" :alt="'Bild av märket ' + product.name" class="card-img-top">
+                <img v-else :src="'../src/assets/def.png'">
+            </div>
+
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
                 <h6 class="card-subtitle">{{ product.price + " kr" }}</h6>
@@ -159,3 +163,18 @@ export default{
     }
 }
 </script>
+<style scoped>
+.ratio-1x1 {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%; /* 1:1 Aspect Ratio */
+        }
+        .ratio-1x1 img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /*  ensure image cover the container without error */
+        }
+</style>
