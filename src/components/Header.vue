@@ -16,7 +16,7 @@
                         <a id="nav-2" class="nav-link" href="/product">Produkter</a>
                     </li>
                    
-                    <div v-if="checkRoleStatus('1')" style="display: flex;">
+                    <div class="navbaritems" v-if="checkRoleStatus('1')">
                     <li class="nav-item">
                         <a id="nav-3" class="nav-link" href="/category">Kategori</a>
                     </li>
@@ -27,7 +27,7 @@
                         <a id="nav-5" class="nav-link" href="/admin">Administrera</a>
                     </li>
                     </div>
-                    <div v-if="checkRoleStatus('2')" style="display: flex;">
+                    <div class="navbaritems" v-if="checkRoleStatus('2')">
                         <li class="nav-item">
                         <a id="nav-4" class="nav-link" href="/bookings">Bokningar</a>
                     </li>
@@ -75,7 +75,7 @@ export default {
         logoutUser() {
             if (confirm("Vill du logga ut?")) {
                 sessionStorage.clear()
-                window.location.href = "/login?message=1";
+                window.location.href = "/?message=1";
             }
         },
         // search for a game
@@ -108,22 +108,11 @@ export default {
         },
         // check if user is logged in or not, and what role
         async checkRole(){
-            if (sessionStorage.getItem("APITOKEN") !== null) {
-                const resp = await fetch("http://127.0.0.1:8000/api/roleid/" + sessionStorage.getItem("userId") , {
-                method: "GET",
-                headers: {
-                "Accept": "application/json",
-                "Content-type": "application/json",
-                "Authorization": `Bearer ${sessionStorage.getItem("APITOKEN")}`
-                }});
+            if (sessionStorage.getItem("roleId") == null) {
                 
-                const data = await resp.json();
-
-                sessionStorage.setItem("roleId", data.role_id);
+                sessionStorage.setItem("roleId", 0);
                 
-            } else {
-                sessionStorage.setItem('roleId', 0);
-            }
+            } 
         },
         checkLogin(){
             if(sessionStorage.getItem("APITOKEN") !== null){
@@ -152,5 +141,15 @@ export default {
 <style scoped>
 .navbar-toggler:hover{
     background-color: rgb(55, 58, 58);
+}
+.navbaritems{
+    display:flex;
+}
+@media only screen and (max-width: 1199px) {
+
+    .navbaritems{
+    display:block;
+}
+
 }
 </style>

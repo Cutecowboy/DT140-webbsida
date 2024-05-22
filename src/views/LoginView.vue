@@ -59,12 +59,27 @@ export default {
                     document.getElementById("message").style.marginTop = "2rem";
                     setTimeout(this.timer, 10000);
 
-                } else {
-                    
+                } else {                  
                     sessionStorage.setItem("APITOKEN", data.token);
                     sessionStorage.setItem("userId", data.userId);
+
+                    const resp1 = await fetch("http://127.0.0.1:8000/api/roleid/" + sessionStorage.getItem("userId") , {
+                    method: "GET",
+                    headers: {
+                    "Accept": "application/json",
+                    "Content-type": "application/json",
+                    "Authorization": `Bearer ${sessionStorage.getItem("APITOKEN")}`
+                    }});
+                    
+                    const data1 = await resp1.json();
+
+                    sessionStorage.setItem("roleId", data1.role_id);
+                    
+               
+                        
+
                     // insert message in redirection
-                    window.location.href = "/?message=2"
+                    window.location.href = "/"
                 }
 
 
