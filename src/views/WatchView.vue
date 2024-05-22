@@ -58,11 +58,8 @@ export default {
 </script>
 
 <template>
-    <h2>Hej</h2>
-
     <Watch :Product="this.product" :Photo="this.photo"/>
 
-<!--     <Addtodo @todoAdded="getTodos()" /> -->
 </template>
 
 <style scoped>

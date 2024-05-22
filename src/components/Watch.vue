@@ -3,53 +3,152 @@
 <!-- if user or not logged in -->
 <div v-if="roleId() !== '1'">
 
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 ">
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <h2>{{Product.name}}</h2>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <h5 class="text-muted">Märke: {{Product.brand}}</h5>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <h4 class="text-success">{{Product.price}} SEK</h4>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <p>{{Product.description}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container mt-5">                  
 
-    <h1>hej</h1>
-    <p>asd</p>
-    <h2>{{ Product.name }}</h2>
-    <div> {{ Product.name }}
-    <p>{{Product.brand}}</p>
-    <p>{{ Product.description }}</p>
-    <p>{{ Photo.img1 }}</p>
+        <div class="row">
+            <div class="col-md-8 ">
+                <div class="slideshow-container">
+                    <div class="slideshow-slide">
+                        <a :href="getPath(0, this.Photo.id)"  data-lightbox="gallery">
+                        <img :src="getPath(0, this.Photo.id)" :alt="'Image'" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="slideshow-slide">
+                        <a :href="getPath(1, this.Photo.id)"  data-lightbox="gallery">
+                        <img :src="getPath(1, this.Photo.id)" :alt="'Image'" class="img-fluid">
+                        </a>                    </div>
+                    <div class="slideshow-slide">
+                        <a :href="getPath(2, this.Photo.id)"  data-lightbox="gallery">
+                        <img :src="getPath(2, this.Photo.id)" :alt="'Image'" class="img-fluid">
+                        </a>                    </div>
+                    <a class="prev">&#10094;</a>
+                    <a class="next">&#10095;</a>
+                </div>
+                <div class="dot-container">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+
+    
     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+
+ 
+
+
+    
 </div>
 <div v-else>
-    <h1>Administrera produkten: {{ Product.name }}</h1>
-    <p>{{Product.brand}}</p>
-    <p>{{ Product.description }}</p>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 ">
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <h2>Administrera produkten: {{ Product.name }}</h2>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <h5 class="text-muted">Märke: {{Product.brand}}</h5>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <h4 class="text-success">{{Product.price}} SEK</h4>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <h4 class="text-danger" v-if="bookStatus(this.Product.book_id)">Bokad</h4>
+                        <h4 class="text-success" v-else>Bokningsbar</h4>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <p>{{Product.description}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container mt-5">                  
 
-    {{ Product.book_id }}
+        <div class="row">
+            <div class="col-md-8 ">
+                <div class="slideshow-container">
+                    <div class="slideshow-slide">
+                        <a :href="getPath(0, this.Photo.id)"  data-lightbox="gallery">
+                        <img :src="getPath(0, this.Photo.id)" :alt="'Image'" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="slideshow-slide">
+                        <a :href="getPath(1, this.Photo.id)"  data-lightbox="gallery">
+                        <img :src="getPath(1, this.Photo.id)" :alt="'Image'" class="img-fluid">
+                        </a>                    </div>
+                    <div class="slideshow-slide">
+                        <a :href="getPath(2, this.Photo.id)"  data-lightbox="gallery">
+                        <img :src="getPath(2, this.Photo.id)" :alt="'Image'" class="img-fluid">
+                        </a>                    </div>
+                    <a class="prev">&#10094;</a>
+                    <a class="next">&#10095;</a>
+                </div>
+                <div class="dot-container">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+
+    
+    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 
+          
+        
 
-
-<div class="container mt-5">
-    <div class="row">
-      <div class="col-md-4">
-        <img :src="getPath(0, this.Photo.id)" :alt="'Image'" class="img-fluid thumbnail" @click="enlargeImage(getPath(0, this.Photo.id))">
-        </div>
-        <div class="col-md-4">
-        <img :src="getPath(1, this.Photo.id)" :alt="'Image'" class="img-fluid thumbnail" @click="enlargeImage(getPath(1, this.Photo.id))">
-        </div>
-        <div class="col-md-4">
-        <img :src="getPath(2, this.Photo.id)" :alt="'Image'" class="img-fluid thumbnail" @click="enlargeImage(getPath(2, this.Photo.id))">
-        </div>
-    </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-body text-center">
-            <img :src="enlargedImgSrc" alt="Enlarged Image" class="img-fluid">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
 <div v-if="roleId() === '2'">
-        <form @submit.prevent="bookProduct(this.Product.book_id)">
+        <form class="mt-4" @submit.prevent="bookProduct(this.Product.book_id)">
     
         <input  v-if="bookStatus(this.Product.book_id)" type="submit" class="btn btn-success mt-3" id="boka" value="Reservera">
         <button type="button" class="btn btn-success btn-lg" disabled id="avboka">Reserverad</button>
@@ -92,6 +191,45 @@
 
 <script>
 import $ from 'jquery';
+$(document).ready(function() {
+            var slideIndex = 0;
+            showSlides(slideIndex);
+
+            function showSlides(n) {
+                var slides = $(".slideshow-slide");
+                var dots = $(".dot");
+                if (n >= slides.length) { slideIndex = 0; }
+                if (n < 0) { slideIndex = slides.length - 1; }
+                slides.hide();
+                dots.removeClass("active");
+                slides.eq(slideIndex).show();
+                dots.eq(slideIndex).addClass("active");
+            }
+
+            function nextSlide() {
+                showSlides(slideIndex += 1);
+            }
+
+            function prevSlide() {
+                showSlides(slideIndex -= 1);
+            }
+
+            $(".next").click(function() {
+                nextSlide();
+            });
+
+            $(".prev").click(function() {
+                prevSlide();
+            });
+
+            $(".dot").click(function() {
+                var index = $(this).index();
+                showSlides(slideIndex = index);
+            });
+
+          });
+
+
 
 export default{
     data() {
@@ -267,16 +405,7 @@ export default{
             } 
 
         },
-        enlargeImage(src) {
-            console.log(src)
-            this.enlargedImgSrc = src;
-
-            $('#exampleModal').modal('show');
-            $('#exampleModal').modal('show');
-
-        }
-
-     
+  
 
         /* timer() {
         document.getElementById("message").style.display = "none";
@@ -288,3 +417,57 @@ export default{
     }
 }
 </script>
+<style scoped>
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+        }
+        .slideshow-slide {
+            display: none;
+            padding: 0 2rem;
+            padding-left: 3rem;
+        }
+        img{
+            
+            
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            user-select: none;
+        }
+        .prev {
+            left: 0;
+            color:black;
+        }
+        .next {
+            right: 0;
+            color:black;
+        }
+        .dot-container {
+            text-align: center;
+            padding: 10px 0;
+            background: #ddd;
+        }
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+        .active, .dot:hover {
+            background-color: #717171;
+        }
+</style>

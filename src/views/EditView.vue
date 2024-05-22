@@ -15,9 +15,9 @@
     <label for="price" class="form-label">Pris</label>
     <input type="number" v-model="price" class="form-control" required>
     
-    <label class='radio' v-for="(option, index) in options" :key="index">
+    <label class='radio rad' v-for="(option, index) in options" :key="index">
       <input type="radio" v-model="this.status" :value="option.value">
-      {{ option.label }}
+      {{ option.label }} 
     </label><br>
 
 
@@ -25,18 +25,29 @@
     <select name="category" class="form-select" v-model="this.categoryname">
         <option v-for="category in categories" :category="category" :key="category.id">{{ category.categoryname }}</option>
     </select><br>
-    <input type="file" accept="image/*" id="img1" @change="onFileSelected">
-    <input type="file" accept="image/*" id="img2" @change="onFileSelected">
+
+    <h5>Byt ut bilder (se nedan)</h5>
+
+    <label class="form-label">Bild 1</label><br>
+    <input type="file" accept="image/*" id="img1" @change="onFileSelected"><br>
+    <label class="form-label">Bild 2</label><br>
+    <input type="file" accept="image/*" id="img2" @change="onFileSelected"><br>
+    <label class="form-label">Bild 3</label><br>
     <input type="file" accept="image/*" id="img3" @change="onFileSelected">
 
     <br>
-    <input type="submit" class="btn btn-success mt-3" value="Redigera">
+    <input type="submit" class="btn btn-success mt-4 mb-5" value="Redigera">
     </form>
 
-    <h3>Bilder i inlägget OBS: gallery?</h3>
-    <img class="img-fluid" :src="'http://127.0.0.1:8000/api/showPhoto/'+ this.photoName[0]" alt="">
-    <img class="img-fluid" :src="'http://127.0.0.1:8000/api/showPhoto/'+ this.photoName[1]" alt="">
-    <img class="img-fluid" :src="'http://127.0.0.1:8000/api/showPhoto/'+ this.photoName[2]" alt="">
+    <h3>Bilder i inlägget</h3>
+    <h5 class="mb-3">Bild 1</h5>
+    <img class="img-fluid" :src="'http://127.0.0.1:8000/api/showPhoto/'+ this.photoName[0]" alt="Bild 1">
+    <h5 class="mt-3 mb-3">Bild 2</h5>
+
+    <img class="img-fluid" :src="'http://127.0.0.1:8000/api/showPhoto/'+ this.photoName[1]" alt="Bild 2">
+    <h5 class="mt-3 mb-3">Bild 3</h5>
+
+    <img class="img-fluid" :src="'http://127.0.0.1:8000/api/showPhoto/'+ this.photoName[2]" alt="Bild 3">
 
 
 </template>
@@ -109,7 +120,7 @@ export default {
             data1.forEach(cat => {
                 if(cat.id == this.category_id){
                     console.log(data1)
-                    this.categoryname == cat.categoryname
+                    this.categoryname = cat.categoryname
                 }
             });
 
@@ -269,7 +280,7 @@ export default {
             document.getElementById("message").style.display = "none";
         },
         restrict(){
-            if(sessionStorage.getItem('roleId') !== '2'){
+            if(sessionStorage.getItem('roleId') != '1'){
             window.location.href = "/?message=2";
         }
     }
@@ -285,3 +296,12 @@ export default {
 }
 
 </script>
+<style scoped>
+img{
+    max-width: 450px;
+}
+.rad{
+    display:block;
+    margin-top: 1rem;
+}
+</style>
