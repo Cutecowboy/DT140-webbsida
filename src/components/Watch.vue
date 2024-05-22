@@ -151,6 +151,7 @@
         <form class="mt-4" @submit.prevent="bookProduct(this.Product.book_id)">
     
         <input  v-if="bookStatus(this.Product.book_id)" type="submit" class="btn btn-success mt-3" id="boka" value="Reservera">
+        <button type="button" class="btn btn-danger" id="avbokning" @click="unbook(this.Product.book_id)">Avboka</button>
         <button type="button" class="btn btn-success btn-lg" disabled id="avboka">Reserverad</button>
 
         </form>
@@ -361,14 +362,23 @@ export default{
                 const data = await resp.json()
                 console.log(data.status)
                 if(data.status == 1){
+                    if(data.user_id == sessionStorage.getItem("userId")){
+                        console.log("min bokning");
+                        document.getElementById("boka").style.display = "none";
+                        document.getElementById("avboka").style.display = "none";
+
+                        return true;
+                    } else {
                     console.log("returnerar sant")
                     document.getElementById("boka").style.display = "none";
 
-                    return true;
+                        return true;
+                    }
                 } else 
                 {
                     console.log("returnerar falskt")
                     document.getElementById("avboka").style.display = "none";
+                    document.getElementById("avbokning").style.display = "none";
 
 
                     return false;
@@ -405,6 +415,32 @@ export default{
             } 
 
         },
+        async unbook(id){
+            if(confirm("Är du säker på att du vill avboka produkten?")){
+                let bookBody = {
+                    status: 0,
+                    user_id: 0
+                }
+                const resp = await fetch("http://127.0.0.1:8000/api/book/" + id, {
+            method: "PUT",
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json",
+                "Authorization": `Bearer ${sessionStorage.getItem("APITOKEN")}`
+            },
+            body: JSON.stringify(bookBody)
+            });
+
+            if(resp.status === 200){
+            window.location.href = "/bookings?message=1"            
+            } else {
+                document.getElementById("message").innerHTML = "Något gick fel när spelet skulle tas bort!";
+                document.getElementById("message").style.display = "block";
+                setTimeout(this.timer, 10000);
+            }
+
+            }
+        }
   
 
         /* timer() {

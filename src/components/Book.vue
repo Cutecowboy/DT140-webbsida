@@ -4,8 +4,11 @@
         <div class="card" >
             <RouterLink :to="`/productinfo/${product.id}`" class="noLink">
 
-            <img v-if="assignPhoto(product.photo_id, this.photos) !== null" :src="this.imagePath" :alt="'Bild av märket ' + product.name" class="card-img-top">
-            <img v-else :src="'../src/assets/def.png'">
+                <div class="ratio-1x1">
+
+                    <img v-if="assignPhoto(product.photo_id, this.photos) !== null" :src="this.imagePath" :alt="'Bild av märket ' + product.name" class="card-img-top">
+                    <img v-else :src="'../src/assets/def.png'">
+                </div>
              </RouterLink>
 
             <div class="card-body">
@@ -15,9 +18,9 @@
                 <div v-if="roleId() == '2'">
         
                     <RouterLink :to="`/productinfo/${product.id}`">
-                    <button class="btn btn-success mt-3">Se mer</button>
+                    <button class="btn btn-success">Se mer</button>
                     </RouterLink>
-                    <button @click="unbook(product.book_id)" class="btn btn-danger mt-3 ms-3">Avboka</button>
+                    <button @click="unbook(product.book_id)" class="btn btn-danger ms-3">Avboka</button>
 
                 
 
@@ -165,3 +168,18 @@ export default{
     }
 }
 </script>
+<style scoped>
+.ratio-1x1 {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%; /* 1:1 Aspect Ratio */
+        }
+        .ratio-1x1 img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /*  ensure image cover the container without error */
+        }
+</style>

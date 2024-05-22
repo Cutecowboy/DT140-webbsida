@@ -52,9 +52,8 @@ export default{
             
             const data = await resp.json(); 
 
-            if(resp.status != 404){
-                this.bookings = data;
-            }
+            this.bookings = data;
+            
             console.log(data)
             // if any bookings
             if(data.length > 0){
