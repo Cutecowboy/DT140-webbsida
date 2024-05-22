@@ -17,9 +17,15 @@
     <select name="category" class="form-select" v-model="this.categoryname">
         <option v-for="category in categories" :category="category" :key="category.id">{{ category.categoryname }}</option>
     </select>
-    <input type="file" accept="image/*" id="img1" @change="onFileSelected">
-    <input type="file" accept="image/*" id="img2" @change="onFileSelected">
-    <input type="file" accept="image/*" id="img3" @change="onFileSelected">
+    
+    <label for="img1" class="form-label mt-2">Bild 1</label><br>
+    <input type="file" accept="image/*" id="img1" @change="onFileSelected"><br>
+
+    <label for="img2" class="form-label mt-2">Bild 2</label><br>
+    <input type="file" accept="image/*" id="img2" @change="onFileSelected"><br>
+
+    <label for="img3" class="form-label mt-2">Bild 3</label><br>
+    <input type="file" accept="image/*" id="img3" @change="onFileSelected"><br>
 
 <input type="submit" class="btn btn-success mt-3" value="Lägg till">
 
