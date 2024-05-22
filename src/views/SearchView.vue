@@ -100,12 +100,16 @@
         // message timer, after 10 seconds hide the message div 
         timer() {
           document.getElementById("message").style.display = "none";
-        }
+        },
+        title() {
+      document.getElementById("title").innerHTML += "Sök"
+    }
     
       },
       mounted() {
         this.breadcrumb();
         this.searchProduct(this.query);
+        this.title();
 
       }
     }

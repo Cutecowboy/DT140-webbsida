@@ -180,10 +180,14 @@ export default {
             <li class="breadcrumb-item active">Administrera</li>
             `
         },
+        title() {
+      document.getElementById("title").innerHTML += "Administrera"
+    }
     },
     mounted(){
         this.getUsers();
         this.breadcrumb();
+        this.title();
     }
 }
 

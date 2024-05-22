@@ -33,12 +33,16 @@ export default {
             <li class="breadcrumb-item active">Produkter</li>
             `
         },
+        title() {
+      document.getElementById("title").innerHTML += "Produkter"
+        }
         
     },
     mounted() {
         this.getProducts();
         this.getPhotos();
         this.breadcrumb();
+        this.title();
     }
 }
 

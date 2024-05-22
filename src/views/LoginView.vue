@@ -89,13 +89,17 @@ export default {
         // message timer, after 10 seconds hide the message div 
         timer() {
             document.getElementById("message").style.display = "none";
-        }
+        },
+        title() {
+      document.getElementById("title").innerHTML += "Logga in"
+    }
 
     },
     mounted() {
         this.hideHeadFoot();
         this.checkLoginStatus();
         this.checkMessage(this.message);
+        this.title();
     }
 
 }

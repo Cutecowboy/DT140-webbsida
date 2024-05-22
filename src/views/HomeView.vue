@@ -7,9 +7,13 @@ export default{
             <li class="breadcrumb-item active">Hem</li>
             `
         },
+    title() {
+      document.getElementById("title").innerHTML += "Hem"
+    }
   },
   mounted(){
     this.breadcrumb();
+    this.title();
   }
 
 

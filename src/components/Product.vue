@@ -122,7 +122,6 @@ export default{
             if(confirm("Är du säker på att du vill avboka bokningen?")){
                 // fetch username info via API token, API calling or via sessionStorage
                 let userId = sessionStorage.getItem("userId");
-                console.log(userId, "my userID")
           
                 // book body, set status to booked via status = 1, send userid 
                 let bookBody = {
@@ -137,6 +136,7 @@ export default{
                     headers: {
                         "Accept": "application/json",
                         "Content-type": "application/json",
+                        "Authorization": `Bearer ${sessionStorage.getItem("APITOKEN")}`
                     },
                     body: JSON.stringify(bookBody)
                 });

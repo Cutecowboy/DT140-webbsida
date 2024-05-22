@@ -80,11 +80,15 @@ export default {
         },
         timer() {
             document.getElementById("message").style.display = "none";
+        },
+        title() {
+      document.getElementById("title").innerHTML += "Registrera"
         }
     },
     mounted() {
         this.hideHeadFoot();
         this.checkLoginStatus();
+        this.title(); 
     }
 }
 

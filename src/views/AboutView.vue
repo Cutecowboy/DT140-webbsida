@@ -20,9 +20,13 @@ export default {
             <li class="breadcrumb-item active">Om oss</li>
             `
         },
+        title() {
+      document.getElementById("title").innerHTML += "Om oss"
+    }
     },
     mounted() {
         this.breadcrumb();
+        this.title();
     }
 }
 

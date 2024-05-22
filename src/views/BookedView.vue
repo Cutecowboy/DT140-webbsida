@@ -89,6 +89,9 @@ export default{
             <li class="breadcrumb-item active">Bokningar</li>
             `
         },
+        title() {
+      document.getElementById("title").innerHTML += "Bokningar"
+    }
     
     },
     mounted(){
@@ -96,6 +99,7 @@ export default{
 
         this.getBooking();
         this.breadcrumb();
+        this.title();
     }
 }
 

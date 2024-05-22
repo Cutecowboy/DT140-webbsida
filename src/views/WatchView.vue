@@ -34,6 +34,7 @@ export default {
             this.photo = data1;
             console.log(data);
             this.breadcrumb();
+            this.title(data.name)
 
         },
         
@@ -44,6 +45,9 @@ export default {
             <li class="breadcrumb-item active">${this.product.name}</li>
             `
         },
+        title(name) {
+      document.getElementById("title").innerHTML += name
+    }
         
     },
     mounted(){

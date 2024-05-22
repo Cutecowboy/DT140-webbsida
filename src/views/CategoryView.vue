@@ -233,11 +233,15 @@ export default {
             <li class="breadcrumb-item active">Kategori</li>
             `
         },
+        title() {
+      document.getElementById("title").innerHTML += "Kategorier"
+    }
     },
     mounted(){
         this.restrict();
         this.getCategory();
         this.breadcrumb();
+        this.title();
     }
 }
 </script>

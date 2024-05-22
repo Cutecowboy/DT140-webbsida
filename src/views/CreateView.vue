@@ -25,10 +25,14 @@ export default {
             <li class="breadcrumb-item active">Skapa</li>
             `
         },
+        title() {
+      document.getElementById("title").innerHTML += "Skapa"
+    }
     },
     mounted(){
         this.restrict();
         this.breadcrumb();
+        this.title();
     }
 } 
 
