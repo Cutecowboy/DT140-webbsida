@@ -4,16 +4,16 @@
     <label for="name" class="form-label">Produktnamn</label>
     <input type="text" v-model="name" class="form-control" required>
 
-    <label for="brand" class="form-label">Produktmärke</label>
+    <label for="brand" class="form-label mt-2">Produktmärke</label>
     <input type="text" v-model="brand" class="form-control" required>
 
-    <label for="description" class="form-label">Produktbeskrivning</label>
+    <label for="description" class="form-label mt-2">Produktbeskrivning</label>
     <input type="text" v-model="description" class="form-control" required>
 
-    <label for="price" class="form-label">Pris</label>
+    <label for="price" class="form-label mt-2">Pris</label>
     <input type="number" v-model="price" class="form-control" required>
 
-    <label for="category" class="form-label">Kategori</label>
+    <label for="category" class="form-label mt-2">Kategori</label>
     <select name="category" class="form-select" v-model="this.categoryname">
         <option v-for="category in categories" :category="category" :key="category.id">{{ category.categoryname }}</option>
     </select>
