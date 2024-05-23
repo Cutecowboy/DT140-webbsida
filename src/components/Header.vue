@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-xl navbar-dark bg-dark mb-3" id="header">
         <div class="container-fluid">
-            <a class="navbar-brand text-light" href="/">Ted's spelbutik</a>
+            <a class="navbar-brand text-light" href="/"><img class="logo" src="../assets/lampshopen.png"></img></a>
             <button @click="toggleNav()" class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarBasic" aria-controls="navbarBasic" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
                 </ul>
                 <form @submit.prevent="searchGame()" class="d-flex">
                     <input v-model="this.search" class="form-control me-2" type="search" placeholder="Sök efter produkter"
-                        aria-label="Search">
+                        aria-label="Search" required>
                     <button class="btn btn-outline-light" type="submit">Sök</button>
                 </form>
             </div>
@@ -145,11 +145,20 @@ export default {
 .navbaritems{
     display:flex;
 }
+.logo{
+    width:250px;
+}
 @media only screen and (max-width: 1199px) {
 
     .navbaritems{
     display:block;
 }
+
+}
+@media only screen and (max-width: 400px) {
+
+.logo{
+width: 150px}
 
 }
 </style>

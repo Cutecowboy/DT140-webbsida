@@ -49,8 +49,8 @@ export default {
 </script>
 
 <template>
-    <h2>Att göra lista</h2>
-    <div class="row row-cols-1 row-cols-sm-2 g-3">
+    <h1>Produkter</h1>
+    <div class="row row-cols-1 row-cols-sm-2 g-3 mt-3">
         
         <Product v-for="product in products" :product="product" :key="product.id" :photos="photo"/>
     </div>

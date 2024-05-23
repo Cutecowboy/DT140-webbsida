@@ -179,7 +179,7 @@
     </form>
 </div>   
 </div>
-<div v-else>
+<div class="mt-3" v-else>
     <a href="/login">Logga in för att boka</a>
 </div>
 
@@ -351,6 +351,7 @@ export default{
         },
         async bookStatus(id){
             console.log("bokningsstatus", id)
+            if(id != undefined){
             const resp = await fetch("http://127.0.0.1:8000/api/book/" + id, {
             method: "GET",
             headers: {
@@ -370,19 +371,23 @@ export default{
                         return true;
                     } else {
                     console.log("returnerar sant")
-                    document.getElementById("boka").style.display = "none";
+                    if(sessionStorage.getItem("roleId") != "1"){
 
+                    document.getElementById("boka").style.display = "none";
+                    }
                         return true;
                     }
                 } else 
                 {
                     console.log("returnerar falskt")
+                    if(sessionStorage.getItem("roleId") != "1"){
                     document.getElementById("avboka").style.display = "none";
                     document.getElementById("avbokning").style.display = "none";
-
+                    }
 
                     return false;
                 }
+            }
             }
 
         },

@@ -194,9 +194,15 @@ export default {
         },
         title() {
       document.getElementById("title").innerHTML += "Administrera"
-    }
+    },
+    restrict(){
+        if(sessionStorage.getItem('roleId') !== '1'){
+            window.location.href = "/?message=2";
+        }
+    },
     },
     mounted(){
+        this.restrict();
         this.getUsers();
         this.breadcrumb();
         this.title();
