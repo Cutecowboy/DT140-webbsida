@@ -283,13 +283,21 @@ export default {
             if(sessionStorage.getItem('roleId') != '1'){
             window.location.href = "/?message=2";
         }
-    }
+    },
+    breadcrumb() {
+            document.getElementById("breadcrumbs").innerHTML = `
+            <li class="breadcrumb-item"><a href="/">Hem</a></li>
+            <li class="breadcrumb-item"><a href="/product">Produkter</a></li>
+            <li class="breadcrumb-item">Redigera
+            `
+        },
 
     },
     mounted(){
         this.restrict();
         this.id = this.$route.params.id;
         this.getData();
+        this.breadcrumb();
     }
     
 

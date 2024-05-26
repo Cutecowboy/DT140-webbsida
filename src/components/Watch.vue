@@ -96,26 +96,26 @@
                 </div>
                 <div class="row">
 
-                <!-- Large Image -->
-                <div class="col-12 mb-4 big">
-                    <a :href="getPath(0, this.Photo.id)"  data-lightbox="gallery">
-                        <img :src="getPath(0, this.Photo.id)" :alt="'Image 1'" class="img-fluid">
-                        </a>                </div>
-                </div>
-                <div class="row">
-                <!-- First Small Image -->
-                <div class="col-6 small">
-                    <a :href="getPath(1, this.Photo.id)"  data-lightbox="gallery">
-                        <img :src="getPath(1, this.Photo.id)" :alt="'Image 2'" class="img-fluid">
-                        </a>                </div>
-                <!-- Second Small Image -->
-                <div class="col-6 small">
-                    <a :href="getPath(2, this.Photo.id)"  data-lightbox="gallery">
-                        <img :src="getPath(2, this.Photo.id)" :alt="'Image 3'" class="img-fluid">
+                    <!-- Stora Image -->
+                    <div class="col-12 mb-4 big">
+                        <a :href="getPath(0)"  data-lightbox="gallery">
+                            <img :src="getPath(0)" :alt="'Image 1'" class="img-fluid">
+                            </a>                </div>
+                    </div>
+                    <div class="row">
+                    <!-- lilla Image -->
+                    <div class="col-6 small">
+                        <a :href="getPath(1)"  data-lightbox="gallery">
+                            <img :src="getPath(1)" :alt="'Image 2'" class="img-fluid">
                         </a>                
+                    </div>
+                    <!-- lilla Image -->
+                    <div class="col-6 small">
+                        <a :href="getPath(2)"  data-lightbox="gallery">
+                            <img :src="getPath(2)" :alt="'Image 3'" class="img-fluid">
+                        </a>                  
+                    </div>
 
-    
-                </div>
                 </div>
             </div>
         </div>
@@ -276,8 +276,7 @@ export default{
 
       
 
-        getPath(i, photoid){
-            console.log("photoid är ", photoid)
+        getPath(i){
             this.photos[0] = this.Photo.img1
             this.photos[1] = this.Photo.img2
             this.photos[2] = this.Photo.img3

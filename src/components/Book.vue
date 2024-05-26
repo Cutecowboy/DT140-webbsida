@@ -14,7 +14,8 @@
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
                 <h6 class="card-subtitle">{{ product.price + " kr" }}</h6>
-                <p class="card-text">{{ product.description }}</p>
+                <p v-if="product.description.length < 80" class="card-text">{{ product.description }}</p>
+                <p v-else class="card-text">{{product.description.slice(0,80) + "...."}}</p>
                 <div v-if="roleId() == '2'">
         
                     <RouterLink :to="`/productinfo/${product.id}`">
