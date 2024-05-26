@@ -99,9 +99,14 @@ export default {
             }
 
             for (let i = 0; i < navItems.length; i++) {
-                if(path == navItems[i]){
+                try {
+                    if(path == navItems[i]){
                     document.getElementById(`nav-${i+1}`).classList.add("active");
+                    }
+                } catch (error) {
+                    console.log("Error performing this task, most likely you are trying to bypass to admin right!")
                 }
+                
                 
             }
 
@@ -126,12 +131,28 @@ export default {
                 return false;
 
             } 
+        },
+        // making sure that the system cant be bypassed manually by setting sessionStorage roleid to 1 
+        async checkRoleId(){
+            const resp1 = await fetch("http://127.0.0.1:8000/api/roleid/" + sessionStorage.getItem("userId") , {
+                    method: "GET",
+                    headers: {
+                    "Accept": "application/json",
+                    "Content-type": "application/json",
+                    "Authorization": `Bearer ${sessionStorage.getItem("APITOKEN")}`
+                    }});
+                    
+                    const data1 = await resp1.json();
+                    if(resp1.status != 404){
+                        sessionStorage.setItem("roleId", data1.role_id);
+                    }
         }
 
 
     },
     mounted() {
-        this.checkRole()
+        this.checkRole();
+        this.checkRoleId();
         this.checkNavActive();
     }
 }
