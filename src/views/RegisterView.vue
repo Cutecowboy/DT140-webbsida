@@ -111,7 +111,8 @@ export default {
     </form>
 
     <div id="logintext">
-        <p>Har du en inloggning? <a href="/login">Logga in här</a></p>
+        <p>Har du en inloggning? <RouterLink :to="`/login`"> Logga in här</RouterLink></p>
+        <a href="/">Gå tillbaka till hemsidan</a>
     </div>
 </template>
 

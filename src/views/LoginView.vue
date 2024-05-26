@@ -135,7 +135,10 @@ export default {
     </form>
 
     <div id="registertext">
-        <p>Ingen inloggning? <a href="/register">Registera här</a></p>
+        
+        <p>Ingen inloggning? <RouterLink :to="`/register`"> Registrera här</RouterLink></p>
+        <a href="/">Gå tillbaka till hemsidan</a>
+
     </div>
 </template>
 

@@ -134,6 +134,7 @@ export default {
         },
         // making sure that the system cant be bypassed manually by setting sessionStorage roleid to 1 
         async checkRoleId(){
+            if(sessionStorage.getItem("roleId") != 0){
             const resp1 = await fetch("http://127.0.0.1:8000/api/roleid/" + sessionStorage.getItem("userId") , {
                     method: "GET",
                     headers: {
@@ -147,6 +148,7 @@ export default {
                         sessionStorage.setItem("roleId", data1.role_id);
                     }
         }
+    }
 
 
     },
