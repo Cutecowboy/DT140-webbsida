@@ -27,38 +27,30 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="container mt-5">                  
 
-        <div class="row">
-            <div class="col-md-8 ">
-                <div class="slideshow-container">
-                    <div class="slideshow-slide">
-                        <a :href="getPath(0, this.Photo.id)"  data-lightbox="gallery">
-                        <img :src="getPath(0, this.Photo.id)" :alt="'Image'" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="slideshow-slide">
-                        <a :href="getPath(1, this.Photo.id)"  data-lightbox="gallery">
-                        <img :src="getPath(1, this.Photo.id)" :alt="'Image'" class="img-fluid">
-                        </a>                    </div>
-                    <div class="slideshow-slide">
-                        <a :href="getPath(2, this.Photo.id)"  data-lightbox="gallery">
-                        <img :src="getPath(2, this.Photo.id)" :alt="'Image'" class="img-fluid">
-                        </a>                    </div>
-                    <a class="prev">&#10094;</a>
-                    <a class="next">&#10095;</a>
-                </div>
-                <div class="dot-container">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
-            </div>
-        </div>
+<!-- Large Image -->
+<div class="col-12 mb-4 big">
+    <a :href="getPath(0, this.Photo.id)"  data-lightbox="gallery">
+        <img :src="getPath(0, this.Photo.id)" :alt="'Image 1'" class="img-fluid">
+        </a>                </div>
+</div>
+<div class="row">
+<!-- First Small Image -->
+<div class="col-6 small">
+    <a :href="getPath(1, this.Photo.id)"  data-lightbox="gallery">
+        <img :src="getPath(1, this.Photo.id)" :alt="'Image 2'" class="img-fluid">
+        </a>                </div>
+<!-- Second Small Image -->
+<div class="col-6 small">
+    <a :href="getPath(2, this.Photo.id)"  data-lightbox="gallery">
+        <img :src="getPath(2, this.Photo.id)" :alt="'Image 3'" class="img-fluid">
+        </a>                
+
+
+</div>
+</div>
 
     
-    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -103,37 +95,27 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="container mt-5">                  
 
-        <div class="row">
-            <div class="col-md-8 ">
-                <div class="slideshow-container">
-                    <div class="slideshow-slide">
-                        <a :href="getPath(0, this.Photo.id)"  data-lightbox="gallery">
-                        <img :src="getPath(0, this.Photo.id)" :alt="'Image'" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="slideshow-slide">
-                        <a :href="getPath(1, this.Photo.id)"  data-lightbox="gallery">
-                        <img :src="getPath(1, this.Photo.id)" :alt="'Image'" class="img-fluid">
-                        </a>                    </div>
-                    <div class="slideshow-slide">
-                        <a :href="getPath(2, this.Photo.id)"  data-lightbox="gallery">
-                        <img :src="getPath(2, this.Photo.id)" :alt="'Image'" class="img-fluid">
-                        </a>                    </div>
-                    <a class="prev">&#10094;</a>
-                    <a class="next">&#10095;</a>
+                <!-- Large Image -->
+                <div class="col-12 mb-4 big">
+                    <a :href="getPath(0, this.Photo.id)"  data-lightbox="gallery">
+                        <img :src="getPath(0, this.Photo.id)" :alt="'Image 1'" class="img-fluid">
+                        </a>                </div>
                 </div>
-                <div class="dot-container">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
-            </div>
-        </div>
+                <div class="row">
+                <!-- First Small Image -->
+                <div class="col-6 small">
+                    <a :href="getPath(1, this.Photo.id)"  data-lightbox="gallery">
+                        <img :src="getPath(1, this.Photo.id)" :alt="'Image 2'" class="img-fluid">
+                        </a>                </div>
+                <!-- Second Small Image -->
+                <div class="col-6 small">
+                    <a :href="getPath(2, this.Photo.id)"  data-lightbox="gallery">
+                        <img :src="getPath(2, this.Photo.id)" :alt="'Image 3'" class="img-fluid">
+                        </a>                
 
     
-    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -191,46 +173,6 @@
 </template>
 
 <script>
-import $ from 'jquery';
-$(document).ready(function() {
-            var slideIndex = 0;
-            showSlides(slideIndex);
-
-            function showSlides(n) {
-                var slides = $(".slideshow-slide");
-                var dots = $(".dot");
-                if (n >= slides.length) { slideIndex = 0; }
-                if (n < 0) { slideIndex = slides.length - 1; }
-                slides.hide();
-                dots.removeClass("active");
-                slides.eq(slideIndex).show();
-                dots.eq(slideIndex).addClass("active");
-            }
-
-            function nextSlide() {
-                showSlides(slideIndex += 1);
-            }
-
-            function prevSlide() {
-                showSlides(slideIndex -= 1);
-            }
-
-            $(".next").click(function() {
-                nextSlide();
-            });
-
-            $(".prev").click(function() {
-                prevSlide();
-            });
-
-            $(".dot").click(function() {
-                var index = $(this).index();
-                showSlides(slideIndex = index);
-            });
-
-          });
-
-
 
 export default{
     data() {
@@ -459,55 +401,23 @@ export default{
 }
 </script>
 <style scoped>
-        .slideshow-container {
+        .small{
+            max-width: 200px;
+
+        }
+        .ratio-1x1 {
             position: relative;
-            max-width: 100%;
-            margin: auto;
+            width: 100%;
+            padding-bottom: 100%; /* 1:1 Aspect Ratio */
         }
-        .slideshow-slide {
-            display: none;
-            padding: 0 2rem;
-        }
-        img{
-            
-            
-        }
-        .prev, .next {
-            cursor: pointer;
+        .ratio-1x1 img {
             position: absolute;
-            top: 50%;
-            width: auto;
-            padding: 16px;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            transition: 0.6s ease;
-            user-select: none;
-        }
-        .prev {
+            top: 0;
             left: 0;
-            color:black;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /*  ensure image cover the container without error */
+            
         }
-        .next {
-            right: 0;
-            color:black;
-        }
-        .dot-container {
-            text-align: center;
-            padding: 10px 0;
-            background: #ddd;
-        }
-        .dot {
-            cursor: pointer;
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.6s ease;
-        }
-        .active, .dot:hover {
-            background-color: #717171;
-        }
+
 </style>
