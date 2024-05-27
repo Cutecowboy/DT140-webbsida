@@ -46,7 +46,7 @@ export default {
             `
         },
         title(name) {
-      document.getElementById("title").innerHTML += name
+      document.getElementById("title").innerHTML = "Lampshopen Vintage - " + name
     }
         
     },

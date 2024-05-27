@@ -26,7 +26,7 @@ export default {
             `
         },
         title() {
-      document.getElementById("title").innerHTML += "Skapa"
+      document.getElementById("title").innerHTML = "Lampshopen Vintage - Skapa"
     }
     },
     mounted(){

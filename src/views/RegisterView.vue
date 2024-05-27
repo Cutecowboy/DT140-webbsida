@@ -82,7 +82,7 @@ export default {
             document.getElementById("message").style.display = "none";
         },
         title() {
-      document.getElementById("title").innerHTML += "Registrera"
+      document.getElementById("title").innerHTML = "Lampshopen Vintage - Registrera" 
         }
     },
     mounted() {

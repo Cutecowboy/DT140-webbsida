@@ -102,7 +102,7 @@
           document.getElementById("message").style.display = "none";
         },
         title() {
-      document.getElementById("title").innerHTML += "Sök"
+      document.getElementById("title").innerHTML = "Lampshopen Vintage - Sök" 
     }
     
       },

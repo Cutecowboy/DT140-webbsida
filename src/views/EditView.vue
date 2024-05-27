@@ -291,6 +291,9 @@ export default {
             <li class="breadcrumb-item">Redigera
             `
         },
+        title() {
+      document.getElementById("title").innerHTML = "Lampshopen Vintage - Redigera" 
+    },
 
     },
     mounted(){
@@ -298,6 +301,7 @@ export default {
         this.id = this.$route.params.id;
         this.getData();
         this.breadcrumb();
+        this.title();
     }
     
 

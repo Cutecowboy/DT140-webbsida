@@ -8,7 +8,7 @@ export default{
             `
         },
     title() {
-      document.getElementById("title").innerHTML += "Hem"
+      document.getElementById("title").innerHTML = "Lampshopen Vintage - Hem" 
     }
   },
   mounted(){

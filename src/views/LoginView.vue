@@ -106,7 +106,7 @@ export default {
             document.getElementById("message").style.display = "none";
         },
         title() {
-      document.getElementById("title").innerHTML += "Logga in"
+      document.getElementById("title").innerHTML = "Lampshopen Vintage - Logga in" 
     }
 
     },

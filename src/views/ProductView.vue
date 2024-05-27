@@ -34,7 +34,7 @@ export default {
             `
         },
         title() {
-      document.getElementById("title").innerHTML += "Produkter"
+      document.getElementById("title").innerHTML = "Lampshopen Vintage - Produkter" 
         }
         
     },

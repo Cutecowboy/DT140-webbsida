@@ -193,7 +193,7 @@ export default {
             `
         },
         title() {
-      document.getElementById("title").innerHTML += "Administrera"
+      document.getElementById("title").innerHTML = "Lampshopen Vintage - Administrera"
     },
     restrict(){
         if(sessionStorage.getItem('roleId') !== '1'){

@@ -21,7 +21,7 @@ export default {
             `
         },
         title() {
-      document.getElementById("title").innerHTML += "Om oss"
+      document.getElementById("title").innerHTML = "Lampshopen Vintage - Om oss"
     }
     },
     mounted() {

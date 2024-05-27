@@ -258,7 +258,7 @@ export default {
             `
         },
         title() {
-      document.getElementById("title").innerHTML += "Kategorier"
+      document.getElementById("title").innerHTML = "Lampshopen Vintage - Kategorier"
     }
     },
     mounted(){

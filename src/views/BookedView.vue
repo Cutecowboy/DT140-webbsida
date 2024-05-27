@@ -89,7 +89,7 @@ export default{
             `
         },
         title() {
-      document.getElementById("title").innerHTML += "Bokningar"
+      document.getElementById("title").innerHTML = "Lampshopen Vintage - Bokningar"
     }
     
     },
