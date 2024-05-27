@@ -27,7 +27,17 @@ export default{
 
 <template>
   <main>
-    <h1>Första sidan!</h1>
+    <div class="container-fluid welcome-section">
+    <div class="row">
+      <div class="col-md-6 welcome-text ps-0">
+        <h1>Lampshopen Vintage</h1>
+        <p>Varmt välkomna till vår nya hemsida. Här hittar du belysningsprodukter som vi har återställt med kärlek! Du hittar vårt sortiment <a href="/product">här!</a></p>
+      </div>
+      <div class="col-md-6">
+        <img src="../assets/front.jpg" alt="Enterprise Photo" class="enterprise-photo img-fluid">
+      </div>
+    </div>
+  </div>
 
   </main>
 </template>
