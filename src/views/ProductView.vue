@@ -1,5 +1,6 @@
 <script>
 import Product from '../components/Product.vue';
+let urlParam = new URLSearchParams(window.location.search)
 
 export default {
     components: {
@@ -8,7 +9,8 @@ export default {
     data() {
         return {
             products: [],
-            photos: []
+            photos: [],
+            message: urlParam.get("message")
 
         }
     },
@@ -35,7 +37,18 @@ export default {
         },
         title() {
       document.getElementById("title").innerHTML = "Lampshopen Vintage - Produkter" 
-        }
+        },
+        checkMessage(message) {
+            if ((message !== undefined) && (message !== null)) {
+                if(message == 1){
+                    document.getElementById("message").innerHTML = "Du har nu tagit bort produkten!";
+                    document.getElementById("message").style.display = "block";
+                    setTimeout(this.timer, 10000);
+                }
+            }
+
+        },
+
         
     },
     mounted() {
@@ -43,6 +56,8 @@ export default {
         this.getPhotos();
         this.breadcrumb();
         this.title();
+        this.checkMessage(this.message)
+
     }
 }
 

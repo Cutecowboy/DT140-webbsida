@@ -30,7 +30,7 @@ export default{
           setTimeout(this.timer, 10000);
         } 
         else if (message == 3) {
-          document.getElementById("message").innerHTML = "Du har logga in!";
+          document.getElementById("message").innerHTML = "Du har loggat in!";
           document.getElementById("message").style.display = "block";
           setTimeout(this.timer, 10000);
         }

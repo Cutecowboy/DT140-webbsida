@@ -18,6 +18,7 @@
 
 <script>
 import Book from '../components/Book.vue';
+let urlParam = new URLSearchParams(window.location.search)
 
 export default{
     components: {
@@ -29,6 +30,7 @@ export default{
             products: [],
             photos: [],
             prod: [],
+            message: urlParam.get("message")
         }
     },
     methods: {
@@ -49,31 +51,35 @@ export default{
         async getBooking(){
             const resp = await fetch("http://127.0.0.1:8000/api/search/book/" + sessionStorage.getItem("userId"));
             
-            
-            const data = await resp.json(); 
-
-            this.bookings = data;
-            
-            console.log(data)
-            // if any bookings
-            if(data.length > 0){
-                await this.getProducts();
-                await this.getPhotos();
+            if(resp.status != 404){
                 
-                for (let i = 0; i < this.products.length; i++) {
-                    for (let j = 0; j < data.length; j++) {
-                        console.log(this.products[i].book_id)
-                        if(this.products[i].book_id == data[j].id){
-                        this.prod.push(this.products[i]);
-                        console.log("lägg till")
-                    }
-                    }
+            
+                const data = await resp.json(); 
+
+                this.bookings = data;
+                
+                console.log(data)
+                
+                // if any bookings
+                if(data.length > 0){
+                    await this.getProducts();
+                    await this.getPhotos();
                     
-                    
+                    for (let i = 0; i < this.products.length; i++) {
+                        for (let j = 0; j < data.length; j++) {
+                            console.log(this.products[i].book_id)
+                            if(this.products[i].book_id == data[j].id){
+                            this.prod.push(this.products[i]);
+                            console.log("lägg till")
+                        }
+                        }
+                        
+                        
+                    }
+
+
+
                 }
-
-
-
             }
             console.log(this.prod, "detta prod")
         },
@@ -82,6 +88,16 @@ export default{
             window.location.href = "/?message=6";
         }
     },
+    checkMessage(message) {
+            if ((message !== undefined) && (message !== null)) {
+                if(message == 1){
+                    document.getElementById("message").innerHTML = "Du har nu avbokat produkten!";
+                    document.getElementById("message").style.display = "block";
+                    setTimeout(this.timer, 10000);
+                }
+            }
+
+        },
     breadcrumb() {
             document.getElementById("breadcrumbs").innerHTML = `
             <li class="breadcrumb-item"><a href="/">Hem</a></li>
@@ -95,10 +111,11 @@ export default{
     },
     mounted(){
         this.restrict();
-
         this.getBooking();
         this.breadcrumb();
         this.title();
+        this.checkMessage(this.message)
+
     }
 }
 

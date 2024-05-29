@@ -35,8 +35,6 @@
 </template>
 
 <script>
-//import Photo from "../components/Photo.vue";
-import axios from 'axios';
 export default{
     data(){
         return {
@@ -94,7 +92,7 @@ export default{
             });
 
             if(resp.status === 200){
-                this.$router.push('/product?message=10');
+                this.$router.push('/product?message=1');
             } else {
                 document.getElementById("message").innerHTML = "Något gick fel när spelet skulle tas bort!";
                 document.getElementById("message").style.display = "block";

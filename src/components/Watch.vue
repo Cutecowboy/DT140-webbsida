@@ -345,7 +345,7 @@ export default{
             });
 
             if(resp.status === 200){
-                this.$router.push('/product?message=10');
+                this.$router.push('/product?message=1');
             } else {
                 document.getElementById("message").innerHTML = "Något gick fel när spelet skulle tas bort!";
                 document.getElementById("message").style.display = "block";
@@ -357,7 +357,7 @@ export default{
         async checkItem(id){
             const resp = await fetch("http://127.0.0.1:8000/api/product/" + id);
             if(resp.status == 404){
-                window.location.href = "/?message=1"
+                window.location.href = "/?message=7"
             } 
 
         },
