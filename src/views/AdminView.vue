@@ -6,17 +6,17 @@
 
     <div id="form-1" style="display: none;">
     <label for="user" class="form-label">Vilken användare vill du redigera</label>
-    <select @change="toggler(4)" name="user" class="form-select" v-model="this.email">
+    <select @change="toggler(4)" name="user" id="user" class="form-select" v-model="this.email">
         <option v-for="user in users" :user="user" :key="user.id" :value="user.id">{{ user.email }}</option>
     </select>
  
         <form id="form-4" style="display: none;" @submit.prevent="editUser()">
             <label for="name" class="form-label">Namn</label>
-            <input class="form-control" type="text" v-model="username" name="name" id="" required>
+            <input class="form-control" type="text" v-model="username" name="name" id="name" required>
             <label for="email" class="form-label">E-post</label>
-            <input class="form-control" type="email" v-model="email" name="email" id="" required>
+            <input class="form-control" type="email" v-model="email" name="email" id="email" required>
             <label for="role" class="form-label">Roll</label>
-            <select v-model="role" class="form-select" name="" id="">
+            <select v-model="role" class="form-select" name="role" id="role">
                 <option :value="1">Administratör</option>
                 <option :value="2">Användare</option>
             </select>
@@ -28,18 +28,18 @@
     </div>
 
     <div id="form-2" style="display: none;">
-        <label for="user" class="form-label">Vilken användare vill du ta bort</label>
-        <select @change="toggler(5)" name="user" class="form-select" v-model="this.email">
+        <label for="user2" class="form-label">Vilken användare vill du ta bort</label>
+        <select @change="toggler(5)" name="user2" id="user2" class="form-select" v-model="this.email">
             <option v-for="user in users" :user="user" :key="user.id" :value="user.id">{{ user.email }}</option>
         </select>
         <form id="form-5" style="display: none;" @submit.prevent="">
-            <label for="name" class="form-label">Namn</label>
-            <input class="form-control" type="text" v-model="username" name="name" id="" readonly >
-            <label for="email" class="form-label">E-post</label>
-            <input class="form-control" type="email" v-model="email" name="email" id="" readonly>
-            <label for="role" class="form-label">Roll</label>
-            <input v-if="this.role == 1" class="form-control" type="text" value="Administratör" readonly>
-            <input v-else class="form-control" type="text" value="Användare" readonly>
+            <label for="name2" class="form-label">Namn</label>
+            <input class="form-control" type="text" v-model="username" name="name2" id="name2" readonly >
+            <label for="email2" class="form-label">E-post</label>
+            <input class="form-control" type="email" v-model="email" name="email2" id="email2" readonly>
+            <label for="role2" class="form-label">Roll</label>
+            <input v-if="this.role == 1" class="form-control" type="text" value="Administratör" id="role2" readonly>
+            <input v-else class="form-control" type="text" value="Användare" id="role2" readonly>
             
             
             <button @click="deleteUser()" class="btn btn-danger mt-3">Ta bort</button>

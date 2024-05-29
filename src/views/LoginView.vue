@@ -127,9 +127,9 @@ export default {
     <!-- Input for login -->
     <form @submit.prevent="loginUser()">
         <label for="email" class="form-label">E-post</label>
-        <input type="email" class="form-control" placeholder="namn@exempel.com" v-model="email">
+        <input type="email" class="form-control" placeholder="namn@exempel.com" id="email" v-model="email">
         <label for="password" class="form-label">Lösenord</label>
-        <input type="password" class="form-control" v-model="password">
+        <input type="password" class="form-control" id="password" v-model="password">
 
         <input type="submit" value="Logga in" class="btn btn-primary mt-3 mb-2">
     </form>

@@ -101,11 +101,11 @@ export default {
     <form @submit.prevent="registerUser()">
 
         <label for="name" class="form-label">Namn</label>
-        <input type="text" class="form-control" placeholder="Förnamn Efternamn" v-model="name">
+        <input type="name" id="name" class="form-control" placeholder="Förnamn Efternamn" v-model="name">
         <label for="email" class="form-label">E-post</label>
-        <input type="email" class="form-control" placeholder="epost@domän.se" v-model="email">
+        <input type="email" id="email" class="form-control" placeholder="epost@domän.se" v-model="email">
         <label for="password" class="form-label">Lösenord</label>
-        <input type="password" class="form-control" v-model="password">
+        <input type="password" id="password" class="form-control" v-model="password">
 
         <input type="submit" value="Logga in" class="btn btn-primary mt-3 mb-3">
     </form>

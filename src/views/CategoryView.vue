@@ -9,26 +9,26 @@
 
     <form id="form-1" style="display: none;" @submit.prevent="addCategory()">
         <label for="categoryname" class="form-label">Kategori namn</label>
-        <input class="form-control" type="text" v-model="categoryname" name="categoryname" id="" required>
+        <input class="form-control" type="text" v-model="categoryname" name="categoryname" id="categoryname" required>
         <input type="submit" class="btn btn-success mt-3" value="Lägg till">
     </form>
 
     <div id="form-2" style="display: none;">
     <label for="category" class="form-label">Vilken kategori vill du redigera</label>
-    <select @change="toggler(4)" name="category" class="form-select" v-model="this.categoryname">
+    <select @change="toggler(4)" name="category" class="form-select" id="category" v-model="this.categoryname">
         <option v-for="category in categories" :category="category" :key="category.id">{{ category.categoryname }}</option>
         </select>
         <form id="form-4" style="display: none;" @submit.prevent="editCategory()">
 
         <label for="editcatname" class="form-label mt-3">Ny kategori namn</label>
-        <input class="form-control" type="text" v-model="editcatname" name="editcatname" id="" required>
+        <input class="form-control" type="text" v-model="editcatname" name="editcatname" id="editcatname" required>
         <input type="submit" class="btn btn-success mt-3" value="Redigera">
         </form>
     </div>
 
     <div id="form-3" style="display: none;">
-        <label for="category" class="form-label">Vilken kategori vill du ta bort</label>
-        <select name="category" class="form-select" v-model="this.categoryname">
+        <label for="category2" class="form-label">Vilken kategori vill du ta bort</label>
+        <select name="category2" id="category2" class="form-select" v-model="this.categoryname">
             <option v-for="category in categories" :category="category" :key="category.id">{{ category.categoryname }}</option>
         </select>
 

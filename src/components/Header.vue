@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-xl navbar-dark bg-dark mb-3" id="header">
         <div class="container-fluid">
-            <a class="navbar-brand text-light" href="/"><img class="logo" src="../assets/lampshopen.png"></img></a>
+            <a class="navbar-brand text-light" href="/"><img class="logo" src="../assets/lampshopen.png" alt="Lampshopen Vintage logo"></img></a>
             <button @click="toggleNav()" class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarBasic" aria-controls="navbarBasic" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -16,7 +16,7 @@
                         <a id="nav-2" class="nav-link" href="/product">Produkter</a>
                     </li>
                    
-                    <div class="navbaritems" v-if="checkRoleStatus('1')">
+                    <span class="navbaritems" v-if="checkRoleStatus('1')">
                     <li class="nav-item">
                         <a id="nav-3" class="nav-link" href="/category">Kategori</a>
                     </li>
@@ -26,12 +26,12 @@
                     <li class="nav-item">
                         <a id="nav-5" class="nav-link" href="/admin">Administrera</a>
                     </li>
-                    </div>
-                    <div class="navbaritems" v-if="checkRoleStatus('2')">
+                    </span>
+                    <span class="navbaritems" v-if="checkRoleStatus('2')">
                         <li class="nav-item">
                         <a id="nav-4" class="nav-link" href="/bookings">Bokningar</a>
                     </li>
-                    </div>
+                    </span>
                     <li class="nav-item">
                         <a id="nav-6" class="nav-link" href="/about">Om oss</a>
                     </li>

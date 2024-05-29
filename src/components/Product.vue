@@ -17,7 +17,7 @@
                 <div v-if="roleId() == '1'">
         
                     <RouterLink :to="`/editProduct/${product.id}`">
-                    <button class="btn btn-warning mt-3">Redigera</button>
+                        <button class="btn btn-warning mt-3">Redigera</button>
                     </RouterLink>
                     <button @click="deleteGame(product.id)" class="btn btn-danger mt-3 ms-3">Ta bort</button>
 
