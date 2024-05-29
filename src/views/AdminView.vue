@@ -107,6 +107,9 @@ export default {
                     document.getElementById("message").style.display = "block";
                     document.getElementById("message").style.marginTop = "2rem";
                     setTimeout(this.timer, 10000);
+                    this.username = "";
+                    this.email = "";
+                    this.role = "";
                 this.getUsers();
                 
 
@@ -129,6 +132,9 @@ export default {
                     document.getElementById("message").style.display = "block";
                     setTimeout(this.timer, 10000);
                     this.getUsers();
+                    this.username = "";
+                    this.email = "";
+                    this.role = "";
                     
                 } else {
                     document.getElementById("message").innerHTML = "Något gick fel när användaren skulle tas bort!";
