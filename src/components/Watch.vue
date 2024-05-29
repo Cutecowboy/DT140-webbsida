@@ -224,6 +224,8 @@ export default{
                         document.getElementById("message").innerHTML = "Du har nu bokat produkten!";
                         document.getElementById("message").style.display = "block";
                         setTimeout(this.timer, 10000);
+                        document.getElementById("boka").style.display = "none";
+                        document.getElementById("avbokning").style.display = "block";
                     } else {
                         document.getElementById("message").innerHTML = "Något gick fel vid bokningen, testa igen!"
                         document.getElementById("message").style.display = "block";
