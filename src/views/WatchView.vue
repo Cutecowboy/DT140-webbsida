@@ -24,7 +24,7 @@ export default {
             const resp = await fetch("http://127.0.0.1:8000/api/product/" + id);
             const data = await resp.json(); 
             if(resp.status == 404){
-                window.location.href = "/?message=1"
+                window.location.href = "/?message=7"
             } 
             this.product = data;
             this.photo_id = this.product.photo_id;

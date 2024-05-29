@@ -281,7 +281,7 @@ export default {
         },
         restrict(){
             if(sessionStorage.getItem('roleId') != '1'){
-            window.location.href = "/?message=2";
+            window.location.href = "/?message=5";
         }
     },
     breadcrumb() {

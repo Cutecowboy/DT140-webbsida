@@ -79,7 +79,7 @@ export default{
         },
         restrict(){
         if(sessionStorage.getItem('roleId') !== '2'){
-            window.location.href = "/?message=2";
+            window.location.href = "/?message=6";
         }
     },
     breadcrumb() {

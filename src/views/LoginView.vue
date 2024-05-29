@@ -21,7 +21,7 @@ export default {
         checkLoginStatus() {
             if (sessionStorage.getItem("APITOKEN") !== null) {
                 // insert message in the redirection
-                window.location.href = "/?message=1";
+                window.location.href = "/?message=2";
             }
         },
 
@@ -79,7 +79,7 @@ export default {
                         
 
                     // insert message in redirection
-                    window.location.href = "/"
+                    window.location.href = "/?message=3"
                 }
 
 

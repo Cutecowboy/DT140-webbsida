@@ -64,7 +64,7 @@ export default {
                     sessionStorage.setItem("userId", data.userId);
 
                     // insert message in redirection
-                    window.location.href = "/?message=3";
+                    window.location.href = "/?message=4";
                 }
 
 
