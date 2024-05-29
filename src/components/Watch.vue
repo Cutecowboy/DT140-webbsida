@@ -85,8 +85,8 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-12">
-                        <h4 class="text-danger" v-if="bookStatus(this.Product.book_id)">Bokad</h4>
-                        <h4 class="text-success" v-else>Bokningsbar</h4>
+                        <h4 id="btext" class="text-danger" v-if="bookStatus(this.Product.book_id)">Bokad</h4>
+                        <h4 id="atext" class="text-success">Bokningsbar</h4>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -310,13 +310,15 @@ export default{
                         console.log("min bokning");
                         document.getElementById("boka").style.display = "none";
                         document.getElementById("avboka").style.display = "none";
-
                         return true;
                     } else {
                     console.log("returnerar sant")
                     if(sessionStorage.getItem("roleId") != "1"){
 
                     document.getElementById("boka").style.display = "none";
+                    } else {
+                        document.getElementById("atext").style.display = "none";
+
                     }
                         return true;
                     }
@@ -326,6 +328,8 @@ export default{
                     if(sessionStorage.getItem("roleId") != "1"){
                     document.getElementById("avboka").style.display = "none";
                     document.getElementById("avbokning").style.display = "none";
+                    } else {
+                        document.getElementById("btext").style.display = "none";
                     }
 
                     return false;
