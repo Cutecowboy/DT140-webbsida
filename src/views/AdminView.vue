@@ -81,6 +81,8 @@ export default {
         async editUser(){
             console.log(this.role)
             let userBody = {
+                name: this.username,
+                email: this.email,
                 role_id: this.role
             }
 

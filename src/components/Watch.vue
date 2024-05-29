@@ -312,13 +312,11 @@ export default{
                         document.getElementById("avboka").style.display = "none";
                         return true;
                     } else {
-                    console.log("returnerar sant")
                     if(sessionStorage.getItem("roleId") != "1"){
 
-                    document.getElementById("boka").style.display = "none";
+                        document.getElementById("boka").style.display = "none";
                     } else {
                         document.getElementById("atext").style.display = "none";
-
                     }
                         return true;
                     }
