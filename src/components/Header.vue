@@ -16,22 +16,22 @@
                         <a id="nav-2" class="nav-link" href="/product">Produkter</a>
                     </li>
                    
-                    <span class="navbaritems" v-if="checkRoleStatus('1')">
-                    <li class="nav-item">
-                        <a id="nav-3" class="nav-link" href="/category">Kategori</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="nav-4" class="nav-link" href="/skapa">Skapa</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="nav-5" class="nav-link" href="/admin">Administrera</a>
-                    </li>
-                    </span>
-                    <span class="navbaritems" v-if="checkRoleStatus('2')">
+                    <div class="navbaritems" v-if="checkRoleStatus('1')">
                         <li class="nav-item">
-                        <a id="nav-4" class="nav-link" href="/bookings">Bokningar</a>
-                    </li>
-                    </span>
+                            <a id="nav-3" class="nav-link" href="/category">Kategori</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="nav-4" class="nav-link" href="/skapa">Skapa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="nav-5" class="nav-link" href="/admin">Administrera</a>
+                        </li>
+                    </div>
+                    <div class="navbaritems" v-if="checkRoleStatus('2')">
+                        <li class="nav-item">
+                            <a id="nav-4" class="nav-link" href="/bookings">Bokningar</a>
+                        </li>
+                    </div>
                     <li class="nav-item">
                         <a id="nav-6" class="nav-link" href="/about">Om oss</a>
                     </li>
