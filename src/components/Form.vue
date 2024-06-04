@@ -30,9 +30,7 @@
 <input type="submit" class="btn btn-success mt-3" value="Lägg till">
 
 </form>
-{{ category_id }}
-{{ photo_id }}
-{{ book_id }}
+
 </template>
 
 
@@ -90,9 +88,7 @@ export default{
                             }
                         })
                         .then(response => {
-                            console.log('Image uploaded successfully:', response.data);
                             this.photoName[i] = this.selectedFile[i].name;
-                            console.log(this.photoName);
 
                         })
                     }
@@ -148,10 +144,8 @@ export default{
                 if(dummy == 2){
                     // get the category id based on which category was chosen on the select meny
                     this.categories.forEach(cat => {
-                        console.log(cat)
                         if(cat.categoryname == this.categoryname){
                             this.category_id = cat.id;
-                            console.log(this.category_id, "min cat")
                         }
                     });
 
@@ -175,7 +169,6 @@ export default{
                         },
                         body: JSON.stringify(productBody)
                     });
-                    console.log(resp2)
 
                     if(resp2.status == 201){
                         document.getElementById("message").innerHTML = "Produkten har lagts till!";
@@ -213,9 +206,7 @@ export default{
 
         },
         onFileSelected(event){
-            console.log(event.target.id)
-            console.log(event.target.files[0].name);
-            console.log(event.target.files[0])
+
 
             if(event.target.id == "img1"){
                 this.selectedFile[0] = event.target.files[0];

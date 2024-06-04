@@ -13,7 +13,6 @@ export default {
             const data = await resp.json(); 
 
             this.photos = data;
-            console.log(data);
         }
 
     },

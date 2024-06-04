@@ -79,7 +79,6 @@ export default {
             this.users = data;
         },
         async editUser(){
-            console.log(this.role)
             let userBody = {
                 name: this.username,
                 email: this.email,
@@ -118,7 +117,6 @@ export default {
         },
         async deleteUser(){
             if(confirm("Är du säker på att du vill ta bort användaren?")){
-                    console.log("du tar bort")
                     const resp = await fetch("http://127.0.0.1:8000/api/users/" + this.userid, {
                 method: "DELETE",
                 headers: {
@@ -165,7 +163,6 @@ export default {
                 let form = document.getElementById('form-' + i);
                 if(form.style.display == "none"){
                     form.style.display = "block";
-                    console.log("hej")
                 } else {
                     form.style.display = "none";
 

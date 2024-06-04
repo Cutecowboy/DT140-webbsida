@@ -194,7 +194,6 @@ export default{
             if(confirm("Är du säker på att du vill boka produkten?")){
                 // fetch username info via API token, API calling or via sessionStorage
                 let userId = sessionStorage.getItem("userId");
-                console.log(userId, "my userID")
 
              
 
@@ -232,7 +231,7 @@ export default{
                         setTimeout(this.timer, 10000);
                     }
             } else {
-                console.log("user is not logged in!")
+                console.log("User is not logged in!")
             }
         }
         
@@ -243,7 +242,6 @@ export default{
             if(confirm("Är du säker på att du vill avboka bokningen?")){
                 // fetch username info via API token, API calling or via sessionStorage
                 let userId = sessionStorage.getItem("userId");
-                console.log(userId, "my userID")
           
                 // book body, set status to booked via status = 1, send userid 
                 let bookBody = {
@@ -289,11 +287,9 @@ export default{
             document.getElementById("message").style.display = "none";
         },
         roleId(){
-            console.log(sessionStorage.getItem("roleId"))
             return sessionStorage.getItem("roleId");
         },
         async bookStatus(id){
-            console.log("bokningsstatus", id)
             if(id != undefined){
             const resp = await fetch("http://127.0.0.1:8000/api/book/" + id, {
             method: "GET",
@@ -304,10 +300,8 @@ export default{
             });
             if(resp.status != 404){
                 const data = await resp.json()
-                console.log(data.status)
                 if(data.status == 1){
                     if(data.user_id == sessionStorage.getItem("userId")){
-                        console.log("min bokning");
                         document.getElementById("boka").style.display = "none";
                         document.getElementById("avboka").style.display = "none";
                         return true;
@@ -322,7 +316,6 @@ export default{
                     }
                 } else 
                 {
-                    console.log("returnerar falskt")
                     if(sessionStorage.getItem("roleId") != "1"){
                     document.getElementById("avboka").style.display = "none";
                     document.getElementById("avbokning").style.display = "none";
@@ -338,7 +331,6 @@ export default{
         },
         async deleteGame(id){
             if(confirm("Är du säker på att du vill ta bort produkten?")){
-                console.log("du tar bort")
                 const resp = await fetch("http://127.0.0.1:8000/api/product/" + id, {
             method: "DELETE",
             headers: {

@@ -39,14 +39,12 @@ export default{
             const data = await resp.json(); 
 
             this.products = data;
-            console.log(data);
         },
         async getPhotos(){
             const resp = await fetch("http://127.0.0.1:8000/api/photo");
             const data = await resp.json(); 
 
             this.photos = data;
-            console.log(data);
         },
         async getBooking(){
             const resp = await fetch("http://127.0.0.1:8000/api/search/book/" + sessionStorage.getItem("userId"));
@@ -58,7 +56,6 @@ export default{
 
                 this.bookings = data;
                 
-                console.log(data)
                 
                 // if any bookings
                 if(data.length > 0){
@@ -67,10 +64,8 @@ export default{
                     
                     for (let i = 0; i < this.products.length; i++) {
                         for (let j = 0; j < data.length; j++) {
-                            console.log(this.products[i].book_id)
                             if(this.products[i].book_id == data[j].id){
                             this.prod.push(this.products[i]);
-                            console.log("lägg till")
                         }
                         }
                         
@@ -81,7 +76,6 @@ export default{
 
                 }
             }
-            console.log(this.prod, "detta prod")
         },
         restrict(){
         if(sessionStorage.getItem('roleId') !== '2'){

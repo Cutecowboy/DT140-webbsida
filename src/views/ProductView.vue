@@ -20,14 +20,12 @@ export default {
             const data = await resp.json(); 
 
             this.products = data;
-            console.log(data);
         },
         async getPhotos(){
             const resp = await fetch("http://127.0.0.1:8000/api/photo");
             const data = await resp.json(); 
 
             this.photos = data;
-            console.log(data);
         },
         breadcrumb() {
             document.getElementById("breadcrumbs").innerHTML = `

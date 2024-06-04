@@ -105,7 +105,6 @@ export default {
             this.photo_id = data.photo_id;
             
 
-            console.log(data);
 
 
             const resp1 = await fetch("http://127.0.0.1:8000/api/categories/", {
@@ -119,7 +118,6 @@ export default {
             this.categories = data1;
             data1.forEach(cat => {
                 if(cat.id == this.category_id){
-                    console.log(data1)
                     this.categoryname = cat.categoryname
                 }
             });
@@ -144,17 +142,13 @@ export default {
             }});   
            
             const data3 = await resp3.json();
-            console.log(data3);
             this.photoName[0] = data3.img1;
             this.photoName[1] = data3.img2;
             this.photoName[2] = data3.img3;
 
-            console.log(this.photoName);
         },
         onFileSelected(event){
-            console.log(event.target.id)
-            console.log(event.target.files[0].name);
-            console.log(event.target.files[0])
+
 
             if(event.target.id == "img1"){
                 this.selectedFile[0] = event.target.files[0];
@@ -184,9 +178,7 @@ export default {
                             }
                         })
                         .then(response => {
-                            console.log('Image uploaded successfully:', response.data);
                             this.photoName[i] = this.selectedFile[i].name;
-                            console.log(this.photoName);
 
                         })
                     }

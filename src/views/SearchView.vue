@@ -53,7 +53,6 @@
             const data = await resp.json(); 
 
             this.photos = data;
-            console.log(data);
         },
     
         // delete the game if admin presses delete message

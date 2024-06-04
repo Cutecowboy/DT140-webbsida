@@ -52,18 +52,15 @@ export default{
             const data = await resp.json(); 
 
             this.photos = data;
-            console.log(data);
         },
         
         assignPhoto(prodId, photos){
             photos.forEach(async p => {
-                console.log(p)
                 if(prodId == p.id){
                     // found id, now search on laravel
                     
                     const resp = await fetch("http://127.0.0.1:8000/api/showPhoto/" + p.img1);
                     if(resp.status == 200){
-                        console.log("allt funkar")
                         return this.imagePath= "http://127.0.0.1:8000/api/showPhoto/" + p.img1;
 
                     } else return null;
@@ -76,12 +73,10 @@ export default{
 
         },
         roleId(){
-            console.log(sessionStorage.getItem("roleId"))
             return sessionStorage.getItem("roleId");
         },
         async deleteGame(id){
             if(confirm("Är du säker på att du vill ta bort produkten?")){
-                console.log("du tar bort")
                 const resp = await fetch("http://127.0.0.1:8000/api/product/" + id, {
             method: "DELETE",
             headers: {
@@ -102,7 +97,6 @@ export default{
             }
         },
         async bookStatus(id){
-            console.log("bokningsstatus", id)
             const resp = await fetch("http://127.0.0.1:8000/api/book/" + id, {
             method: "GET",
             headers: {
@@ -113,7 +107,6 @@ export default{
             const data = await resp.json()
 
             if(data.status === 1){
-                console.log("returnar sanningens mamma", data)
                 return true;
             } else return true;
              

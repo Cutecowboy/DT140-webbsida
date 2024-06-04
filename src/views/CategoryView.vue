@@ -67,7 +67,6 @@ export default {
 
         },
         async addCategory(){
-            console.log(this.categoryname)
             let dummy = 0;
             // control if the category already exists
             this.categories.forEach(cat => {
@@ -197,10 +196,7 @@ export default {
                 }             
             }
         },
-        test(){
-            console.log(this.categoryname)
-            
-        },
+        
         timer() {
             document.getElementById("message").style.display = "none";
         },
@@ -233,7 +229,6 @@ export default {
                 let form = document.getElementById('form-' + i);
                 if(form.style.display == "none"){
                     form.style.display = "block";
-                    console.log("hej")
                 } else {
                     form.style.display = "none";
 
