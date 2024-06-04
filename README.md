@@ -1,6 +1,17 @@
-# LampProj
+# Lampshopen Vintage - Front-end application
 
-This template should help get you started developing with Vue 3 in Vite.
+Detta är front-end verktygen för att komma åt Lampshopen Vintage. 
+
+Här är meningen att man ska som besökare kunna besöka hemsidan för att se alla lampor på hemsidan.
+Besökare ska vidare kunna registrera, logga in och logga ut, där besökare som är inloggade kan boka eller avboka produkter.
+
+Administratörer ska kunna administrera hela hemsidan. Skapa, lägga till, redigera och ta bort information kring deras produkter samt administrera användare på ett lämpligt sätt. 
+
+För att logga: 
+
+Användarnamn: admin@lampshopen.com 
+Lösenord: password
+
 
 ## Recommended IDE Setup
 
