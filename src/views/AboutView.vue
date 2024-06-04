@@ -1,6 +1,12 @@
 <template>
     <h1>Om oss</h1>
 
+    <p>
+        Lampshopen AB är ett familjeföretag skapades 1997 av Veronica Zetterberg. Hon startade en butik i Falun i dalarna, för att sedan expandera till en ytterligare butik i Borlänge. Under åren har butikerna bytt lokaler och i dagsläget så har Lampshopen en stor butik i Falun. Butiken innehåller allt inom belysning samt reservdelar. De erbjuder även tjänster för ljussättning, konsultation samt installation av belysning. Lampshopens kunder är både privatpersonen och företag, de erbjuder en bred kompetens inom belysning, stort sortiment samt god service.
+    </p>
+
+    <h2>Hitta till oss</h2>
+
     <div class="card p-3">
         <div class="card-body">
     <h5 class="card-title">Lampshopen i Falun</h5>

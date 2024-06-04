@@ -65,7 +65,8 @@ export default {
     <h1>Produkter</h1>
     <div class="row row-cols-1 row-cols-sm-2 g-3 mt-3">
         
-        <Product v-for="product in products" :product="product" :key="product.id" :photos="photo"/>
+        <Product v-if="products.length > 0" v-for="product in products" :product="product" :key="product.id" :photos="photo"/>
+        <div v-else>Hemsidan har inga produkter inne på lagret, kom tillbaka senare!</div>
     </div>
 <!--     <Addtodo @todoAdded="getTodos()" /> -->
 </template>
